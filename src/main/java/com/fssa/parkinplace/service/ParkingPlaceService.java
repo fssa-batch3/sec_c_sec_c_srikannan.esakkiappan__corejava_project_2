@@ -14,6 +14,11 @@ import com.fssa.parkinplace.validation.ParkingPlaceValidation;
 
 public class ParkingPlaceService {
 
+	ParkingPlaceService() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Adds a new ParkingPlace to the database.
 	 *

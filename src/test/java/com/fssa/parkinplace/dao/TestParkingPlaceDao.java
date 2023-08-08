@@ -21,8 +21,8 @@ public class TestParkingPlaceDao {
 	 */
 	public static ParkingPlace testValidParkingPlace() {
 		ParkingPlace place = new ParkingPlace();
-		place.setId(2);
-		place.setPlaceownername("Srik");
+		place.setId(1);
+		place.setPlaceownername("Balaji");
 		place.setAddress("25,kambarstreet");
 		place.setLocality("Taramani");
 		place.setMapurl("https://maps.app.goo.gl/xNbnms9FCoKySDEs5");
@@ -40,7 +40,7 @@ public class TestParkingPlaceDao {
 	 */
 	public static ParkingPlace testInvalidParkingPlace() {
 		ParkingPlace place = new ParkingPlace();
-		place.setId(-2);
+		place.setId(3);
 		return place;
 	}
 
@@ -51,7 +51,7 @@ public class TestParkingPlaceDao {
 	 * @throws DAOException if there is an issue with the DAO operation.
 	 */
 	@Test
-	public void testValidAddParkingPlace() throws DAOException {
+	 void testValidAddParkingPlace() throws DAOException {
 		Assertions.assertTrue(ParkingplaceDao.addParkingPlace(testValidParkingPlace()));
 	}
 
@@ -62,8 +62,8 @@ public class TestParkingPlaceDao {
 	 * @throws DAOException if there is an issue with the DAO operation.
 	 */
 	@Test
-	public void testValidUpdateParkingPlace() throws DAOException {
-		Assertions.assertTrue(ParkingplaceDao.updateParkingPlace(testInvalidParkingPlace()));
+	 void testValidUpdateParkingPlace() throws DAOException {
+		Assertions.assertTrue(ParkingplaceDao.updateParkingPlace(testValidParkingPlace()));
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class TestParkingPlaceDao {
 	 * @throws DAOException if there is an issue with the DAO operation.
 	 */
 	@Test
-	public void testValidDeleteParkingPlace() throws DAOException {
+	 void testValidDeleteParkingPlace() throws DAOException {
 		Assertions.assertTrue(ParkingplaceDao.deleteParkingPlace(testValidParkingPlace().getId()));
 	}
 
@@ -85,7 +85,7 @@ public class TestParkingPlaceDao {
 	 * @throws SQLException if there is an issue with SQL operations.
 	 */
 	@Test
-	public void testValidReadAllParkingPlace() throws DAOException, SQLException {
+	 void testValidReadAllParkingPlace() throws DAOException, SQLException {
 		Assertions.assertTrue(ParkingplaceDao.readParkingPlace());
 	}
 
@@ -94,7 +94,7 @@ public class TestParkingPlaceDao {
 	 * data.
 	 */
 	@Test
-	public void testInvalidAddParkingPlace() {
+	 void testInvalidAddParkingPlace() {
 		try {
 			ParkingplaceDao.addParkingPlace(testInvalidParkingPlace());
 		} catch (DAOException ex) {
@@ -107,7 +107,7 @@ public class TestParkingPlaceDao {
 	 * data.
 	 */
 	@Test
-	public void testInvalidUpdateParkingPlace() {
+	 void testInvalidUpdateParkingPlace() {
 		try {
 			ParkingPlace p = new ParkingPlace();
 			p.setId(0);
@@ -122,7 +122,7 @@ public class TestParkingPlaceDao {
 	 * ID.
 	 */
 	@Test
-	public void testInvalidUpdateParkingPlaceId() {
+	 void testInvalidUpdateParkingPlaceId() {
 		try {
 			ParkingplaceDao.updateParkingPlace(testInvalidParkingPlace());
 		} catch (DAOException ex) {
@@ -135,7 +135,7 @@ public class TestParkingPlaceDao {
 	 * ID.
 	 */
 	@Test
-	public void testInvalidDeleteParkingPlaceId() {
+	 void testInvalidDeleteParkingPlaceId() {
 		try {
 			ParkingplaceDao.deleteParkingPlace(testInvalidParkingPlace().getId());
 		} catch (DAOException ex) {

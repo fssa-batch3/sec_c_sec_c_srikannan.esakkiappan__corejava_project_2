@@ -14,6 +14,11 @@ import com.fssa.parkinplace.model.*;
  */
 public class ParkingPlaceValidation {
 
+	private ParkingPlaceValidation() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Validates all the properties of a ParkingPlace object.
 	 *

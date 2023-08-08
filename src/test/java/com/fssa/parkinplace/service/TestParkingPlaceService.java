@@ -40,7 +40,7 @@ public class TestParkingPlaceService {
 	 * @throws DAOException if there is an issue with the DAO operation.
 	 */
 	@Test
-	public void testValidAddParkingPlace() throws DAOException {
+	 void testValidAddParkingPlace() throws DAOException {
 		TestParkingPlaceService placeservice = new TestParkingPlaceService();
 		Assertions.assertTrue(ParkingPlaceService.addParkingPlace(placeservice.parkinPlace()));
 	}
@@ -52,7 +52,7 @@ public class TestParkingPlaceService {
 	 * @throws DAOException if there is an issue with the DAO operation.
 	 */
 	@Test
-	public void testValidUpdateParkingPlace() throws DAOException {
+	 void testValidUpdateParkingPlace() throws DAOException {
 		TestParkingPlaceService placeservice = new TestParkingPlaceService();
 		Assertions.assertTrue(ParkingPlaceService.updateParkingPlace(placeservice.parkinPlace()));
 	}
@@ -64,7 +64,7 @@ public class TestParkingPlaceService {
 	 * @throws DAOException if there is an issue with the DAO operation.
 	 */
 	@Test
-	public void testValidDeleteParkingPlace() throws DAOException {
+	 void testValidDeleteParkingPlace() throws DAOException {
 		Assertions.assertTrue(ParkingPlaceService.deleteParkingPlace(3));
 	}
 
@@ -76,7 +76,7 @@ public class TestParkingPlaceService {
 	 * @throws SQLException if there is an issue with SQL operations.
 	 */
 	@Test
-	public void testValidReadAllParkingPlaces() throws DAOException, SQLException {
+	 void testValidReadAllParkingPlaces() throws DAOException, SQLException {
 		ParkingPlaceService parkingservice = new ParkingPlaceService();
 		Assertions.assertTrue(parkingservice.readParkingPlace());
 	}

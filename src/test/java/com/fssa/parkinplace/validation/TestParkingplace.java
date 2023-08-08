@@ -22,7 +22,7 @@ public class TestParkingplace {
 	public static ParkingPlace testInvalidParkingPlace() {
 		
 	
-		ParkingPlace invalidParking = new ParkingPlace(null, null, null, null, null, null, null, null);
+		ParkingPlace invalidParking = new ParkingPlace(0, null, null, null, null, null, null, null, null);
 		
 		return invalidParking;
 	}
@@ -55,7 +55,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object creation.
 	 */
 	@Test
-	public void validTestObject() throws ParkinPlaceException, InvalidParkingPlaceException {
+	 void validTestObject() throws ParkinPlaceException, InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.validate(park));
 	}
@@ -64,7 +64,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid ParkingPlace object (null).
 	 */
 	@Test
-	public void inValidTestObject() {
+	 void inValidTestObject() {
 		try {
 			ParkingPlaceValidation.validate(null);
 		} catch (ParkinPlaceException e) {
@@ -78,7 +78,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object creation.
 	 */
 	@Test
-	public void validTestId() throws InvalidParkingPlaceException {
+	 void validTestId() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidateId(park.getId()));
 	}
@@ -87,7 +87,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid ParkingPlace ID (less than 1).
 	 */
 	@Test
-	public void inValidTestId() {
+	 void inValidTestId() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidateId(invalidPark.getId());
@@ -102,7 +102,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object.
 	 */
 	@Test
-	public void validTestOwnerName() throws InvalidParkingPlaceException {
+	 void validTestOwnerName() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidatePlaceOwnerName(park.getPlaceownername()));
 	}
@@ -111,7 +111,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid Place Owner Name (less than 2 characters).
 	 */
 	@Test
-	public void inValidTestOwnerName() {
+	 void inValidTestOwnerName() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidatePlaceOwnerName(invalidPark.getPlaceownername());
@@ -132,7 +132,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object.
 	 */
 	@Test
-	public void validTestAddress() throws InvalidParkingPlaceException {
+	 void validTestAddress() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidateAddress(park.getAddress()));
 	}
@@ -141,7 +141,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid Address (less than 5 characters).
 	 */
 	@Test
-	public void inValidTestAddress() {
+	 void inValidTestAddress() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidateAddress(invalidPark.getAddress());
@@ -162,7 +162,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object.
 	 */
 	@Test
-	public void validTestLocality() throws InvalidParkingPlaceException {
+	 void validTestLocality() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidateLocality(park.getLocality()));
 		
@@ -172,7 +172,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid Locality (less than 2 characters).
 	 */
 	@Test
-	public void inValidTestLocality() {
+	 void inValidTestLocality() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidateLocality(invalidPark.getLocality());
@@ -193,7 +193,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object.
 	 */
 	@Test
-	public void validTestMapUrl() throws InvalidParkingPlaceException {
+	 void validTestMapUrl() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidateMapUrl(park.getMapurl()));
 	}
@@ -202,7 +202,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid Map URL.
 	 */
 	@Test
-	public void inValidTestMapUrl() {
+	 void inValidTestMapUrl() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidateMapUrl(invalidPark.getMapurl());
@@ -223,7 +223,7 @@ public class TestParkingplace {
      * @throws InvalidParkingPlaceException if there's an issue with the ParkingPlace object.
      */
 	@Test
-	public void validTestPhotoUrl() throws InvalidParkingPlaceException {
+	 void validTestPhotoUrl() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidatePlacePhotoUrl(park.getPlacephotourl()));
 	}
@@ -232,7 +232,7 @@ public class TestParkingplace {
      * Test to validate an invalid Place Photo URL.
      */
 	@Test
-	public void inValidTestPhotoUrl() {
+	 void inValidTestPhotoUrl() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidatePlacePhotoUrl(invalidPark.getPlacephotourl());
@@ -253,7 +253,7 @@ public class TestParkingplace {
      * @throws InvalidParkingPlaceException if there's an issue with the ParkingPlace object.
      */
 	@Test
-	public void validTestProofDocUrl() throws InvalidParkingPlaceException {
+	 void validTestProofDocUrl() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidateProofDocUrl(park.getProofdocurl()));
 	}
@@ -262,7 +262,7 @@ public class TestParkingplace {
      * Test to validate an invalid Proof Document URL.
      */
 	@Test
-	public void inValidTestProofDocUrl() {
+	 void inValidTestProofDocUrl() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidateProofDocUrl(invalidPark.getProofdocurl());
@@ -283,7 +283,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object.
 	 */
 	@Test
-	public void validTestLattitude() throws InvalidParkingPlaceException {
+	 void validTestLattitude() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidateLattitude(park.getLattitude()));
 	}
@@ -292,7 +292,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid Lattitude.
 	 */
 	@Test
-	public void inValidTestLattitude() {
+	 void inValidTestLattitude() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidateLattitude(invalidPark.getLattitude());
@@ -313,7 +313,7 @@ public class TestParkingplace {
 	 * @throws InvalidParkingPlaceException if there is an issue with the ParkingPlace object.
 	 */
 	@Test
-	public void validTestLongitude() throws InvalidParkingPlaceException {
+	 void validTestLongitude() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
 		Assertions.assertTrue(ParkingPlaceValidation.ValidateLongitude(park.getLongitude()));
 	}
@@ -322,7 +322,7 @@ public class TestParkingplace {
 	 * Test to validate an invalid Longitude.
 	 */
 	@Test
-	public void inValidTestLongitude() {
+	 void inValidTestLongitude() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
 			ParkingPlaceValidation.ValidateLongitude(invalidPark.getLongitude());

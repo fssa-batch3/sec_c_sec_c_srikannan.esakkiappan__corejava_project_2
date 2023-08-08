@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.fssa.logger.Logger;
 import com.fssa.parkinplace.errors.ParkinPlaceDaoErrors;
 import com.fssa.parkinplace.exception.DAOException;
 import com.fssa.parkinplace.model.ParkingPlace;
@@ -48,7 +49,7 @@ public class ParkingplaceDao {
 				int row = place.executeUpdate();
 
 				// Print a success message and return true if the insertion was successful
-				System.out.println("Parking place Added Successfully");
+				Logger.info("Parking place Added Successfully");
 				return (row > 0) ? true : false;
 			}
 
@@ -85,12 +86,12 @@ public class ParkingplaceDao {
 				place.setString(7, parkin.getLattitude());
 				place.setString(8, parkin.getLongitude());
 				place.setInt(9, parkin.getId());
-
+       
 				// Execute the query to update the data in the database
 				int row = place.executeUpdate();
-
+             
 				// Return true if the update was successful
-				return row > 0;
+				return row > 0?true:false;
 			}
 		} catch (SQLException e) {
 			// If an SQLException occurs, throw a DAOException with a custom error message
@@ -152,7 +153,7 @@ public class ParkingplaceDao {
 				try (ResultSet rs = pst.executeQuery(query)) {
 					// Loop through the result set and print the ID of each ParkingPlace object
 					while (rs.next()) {
-						System.out.print(rs.getInt("id"));
+						Logger.info(rs.getInt("id"));
 					}
 					// Return true to indicate that the reading was successful
 					return true;
@@ -162,6 +163,11 @@ public class ParkingplaceDao {
 				throw new DAOException(ParkinPlaceDaoErrors.INVALID_READ);
 			}
 		}
+	}
+
+	private ParkingplaceDao() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }

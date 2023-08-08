@@ -3,6 +3,8 @@ package com.fssa.parkinplace.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.fssa.logger.Logger;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 /**
@@ -35,7 +37,7 @@ public class ConnectionUtil {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(url, userName, passWord);
-            System.out.println("Connection created");
+            Logger.info("Connection created");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Unable to connect to the database");
@@ -43,7 +45,12 @@ public class ConnectionUtil {
         return con;
     }
 
-    /**
+    private ConnectionUtil() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * Main method to demonstrate obtaining a database connection.
      *
      * @param args Command-line arguments (not used).

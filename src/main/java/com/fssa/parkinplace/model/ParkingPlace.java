@@ -18,6 +18,7 @@ public class ParkingPlace {
     /**
      * Constructs a ParkingPlace object with provided details.
      *
+     * @param id for the parking place.
      * @param placeownername Owner's name for the parking place.
      * @param address Address of the parking place.
      * @param locality Locality of the parking place.
@@ -27,11 +28,12 @@ public class ParkingPlace {
      * @param lattitude Latitude coordinate of the parking place.
      * @param longitude Longitude coordinate of the parking place.
      */
-    public ParkingPlace(String placeownername, String address, String locality, String mapurl,
+    public ParkingPlace(int id, String placeownername, String address, String locality, String mapurl,
                         String placephotourl, String proofdocurl, String lattitude, String longitude) {
         super(); // Call the constructor of the superclass (Object class in this case)
 
         // Initialize the instance variables with the provided values
+        this.id = id;
         this.placeownername = placeownername;
         this.address = address;
         this.locality = locality;

@@ -1,41 +1,55 @@
-// Declare a Java package com.fssa.parkinplace.model
 package com.fssa.parkinplace.model;
 
-// Define a public class named ParkingPlace
+/**
+ * Represents a parking place with various details.
+ */
 public class ParkingPlace {
-	
-	// Declare private instance variables
-	private int id;
-	private String placeownername;
-	private String address;
-	private String locality;
-	private String mapurl;
-	private String placephotourl;
-	private String proofdocurl;
-	private String lattitude;
-	private String longitude;
-	
-	// Parameterized constructor to initialize the instance variables
-	public ParkingPlace(String placeownername, String address, String locality, String mapurl,
-			String placephotourl, String proofdocurl, String lattitude, String longitude) {
-		super(); // Call the constructor of the superclass (Object class in this case)
-		
-		// Initialize the instance variables with the provided values
-		this.placeownername = placeownername;
-		this.address = address;
-		this.locality = locality;
-		this.mapurl = mapurl;
-		this.placephotourl = placephotourl;
-		this.proofdocurl = proofdocurl;
-		this.lattitude = lattitude;
-		this.longitude = longitude;
-	}
-	
-	// Default constructor (with no parameters)
-	public ParkingPlace() {
-		// TODO Auto-generated constructor stub
-	}
 
+    private int id;
+    private String placeownername;
+    private String address;
+    private String locality;
+    private String mapurl;
+    private String placephotourl;
+    private String proofdocurl;
+    private String lattitude;
+    private String longitude;
+
+    /**
+     * Constructs a ParkingPlace object with provided details.
+     *
+     * @param placeownername Owner's name for the parking place.
+     * @param address Address of the parking place.
+     * @param locality Locality of the parking place.
+     * @param mapurl URL to the map location.
+     * @param placephotourl URL to a photo of the parking place.
+     * @param proofdocurl URL to proof documents for the parking place.
+     * @param lattitude Latitude coordinate of the parking place.
+     * @param longitude Longitude coordinate of the parking place.
+     */
+    public ParkingPlace(String placeownername, String address, String locality, String mapurl,
+                        String placephotourl, String proofdocurl, String lattitude, String longitude) {
+        super(); // Call the constructor of the superclass (Object class in this case)
+
+        // Initialize the instance variables with the provided values
+        this.placeownername = placeownername;
+        this.address = address;
+        this.locality = locality;
+        this.mapurl = mapurl;
+        this.placephotourl = placephotourl;
+        this.proofdocurl = proofdocurl;
+        this.lattitude = lattitude;
+        this.longitude = longitude;
+    }
+
+    /**
+     * Constructs a default ParkingPlace object.
+     */
+    public ParkingPlace() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    
 	// Getter method for the id instance variable
 	public int getId() {
 		return id;

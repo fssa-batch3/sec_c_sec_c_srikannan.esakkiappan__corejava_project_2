@@ -7,12 +7,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.fssa.parkinplace.errors.ParkinPlaceDaoErrors;
 import com.fssa.parkinplace.exception.DAOException;
 import com.fssa.parkinplace.model.ParkingPlace;
 
+/**
+ * This class performs database operations related to ParkingPlace objects.
+ */
+
 public class ParkingplaceDao {
 
-	// Method to add a ParkingPlace object to the database
+	/**
+     * Adds a ParkingPlace object to the database.
+     *
+     * @param parkin The ParkingPlace object to be added.
+     * @return True if the insertion was successful, false otherwise.
+     * @throws DAOException if there is an issue with the database operation.
+     */
+	
 	public static boolean addParkingPlace(ParkingPlace parkin) throws DAOException {
 
 		// SQL query to insert a new row into the "parkingplace" table
@@ -31,7 +43,7 @@ public class ParkingplaceDao {
 				place.setString(6, parkin.getProofdocurl());
 				place.setString(7, parkin.getLattitude());
 				place.setString(8, parkin.getLongitude());
-
+				
 				// Execute the query to insert the data into the database
 				int row = place.executeUpdate();
 
@@ -42,11 +54,18 @@ public class ParkingplaceDao {
 
 		} catch (SQLException e) {
 			// If an SQLException occurs, throw a DAOException with a custom error message
-			throw new DAOException("Add Parkingplace to the Database is Failed");
+			throw new DAOException(ParkinPlaceDaoErrors.INVALID_INSERT);
 		}
 	}
 
-	// Method to update a ParkingPlace object in the database
+	/**
+     * Update a ParkingPlace object in the database.
+     *
+     * @param parkin The ParkingPlace object to be updated.
+     * @return True if the update was successful, false otherwise.
+     * @throws DAOException if there is an issue with the database operation.
+     */
+	
 	public static boolean updateParkingPlace(ParkingPlace parkin) throws DAOException {
 
 		// SQL query to update an existing row in the "parkingplace" table based on the ID
@@ -75,14 +94,21 @@ public class ParkingplaceDao {
 			}
 		} catch (SQLException e) {
 			// If an SQLException occurs, throw a DAOException with a custom error message
-			throw new DAOException("Update Parkingplace in the Database is Failed");
+			throw new DAOException(ParkinPlaceDaoErrors.INVALID_UPDATE);
 		}
 	}
 
 	// Method to delete a ParkingPlace object from the database based on its ID
 	public static boolean deleteParkingPlace(int id) throws DAOException {
 
-		// SQL query to delete a row from the "parkingplace" table based on the ID
+		/**
+	     * Deletes a ParkingPlace object from the database based on its ID.
+	     *
+	     * @param id The ID of the ParkingPlace object to be deleted.
+	     * @return True if the deletion was successful, false otherwise.
+	     * @throws DAOException if there is an issue with the database operation.
+	     */
+		
 		final String query = "DELETE FROM parkingplace WHERE id=?";
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
@@ -100,11 +126,18 @@ public class ParkingplaceDao {
 			}
 		} catch (SQLException e) {
 			// If an SQLException occurs, throw a DAOException with a custom error message
-			throw new DAOException("Delete Parkingplace from the Database is Failed");
+			throw new DAOException(ParkinPlaceDaoErrors.INVALID_DELETE);
 		}
 	}
 
-	// Method to read and display all ParkingPlace objects from the database
+	/**
+     * Reads and displays all ParkingPlace objects from the database.
+     *
+     * @return True if the reading was successful, false otherwise.
+     * @throws DAOException if there is an issue with the database operation.
+     * @throws SQLException if there is an issue with SQL execution.
+     */
+	
 	public static boolean readParkingPlace() throws DAOException, SQLException {
 
 		// SQL query to select all rows from the "parkingplace" table
@@ -126,7 +159,7 @@ public class ParkingplaceDao {
 				}
 			} catch (SQLException e) {
 				// If an SQLException occurs, throw a DAOException with a custom error message
-				throw new DAOException("Reading Parkingplace from the Database is Failed");
+				throw new DAOException(ParkinPlaceDaoErrors.INVALID_READ);
 			}
 		}
 	}

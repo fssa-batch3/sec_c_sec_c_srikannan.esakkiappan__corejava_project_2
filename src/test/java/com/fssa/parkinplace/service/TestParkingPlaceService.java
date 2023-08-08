@@ -9,9 +9,16 @@ import org.junit.jupiter.api.Test;
 import com.fssa.parkinplace.exception.DAOException;
 import com.fssa.parkinplace.model.ParkingPlace;
 
+/**
+ * Test class to perform unit tests for the ParkingPlaceService class.
+ */
 public class TestParkingPlaceService {
-	
-	// Method to create and return a valid ParkingPlace object for testing
+
+	/**
+	 * Method to create and return a valid ParkingPlace object for testing.
+	 *
+	 * @return A valid ParkingPlace object.
+	 */
 	public ParkingPlace parkinPlace() {
 		ParkingPlace p1 = new ParkingPlace();
 		p1.setId(3);
@@ -25,28 +32,49 @@ public class TestParkingPlaceService {
 		p1.setLongitude("-122.4194");
 		return p1;
 	}
-	
-	// Test to validate the addParkingPlace method of ParkingPlaceService for valid data
+
+	/**
+	 * Test to validate the addParkingPlace method of ParkingPlaceService for valid
+	 * data.
+	 *
+	 * @throws DAOException if there is an issue with the DAO operation.
+	 */
 	@Test
 	public void testValidAddParkingPlace() throws DAOException {
 		TestParkingPlaceService placeservice = new TestParkingPlaceService();
 		Assertions.assertTrue(ParkingPlaceService.addParkingPlace(placeservice.parkinPlace()));
 	}
-	
-	// Test to validate the updateParkingPlace method of ParkingPlaceService for valid data
+
+	/**
+	 * Test to validate the updateParkingPlace method of ParkingPlaceService for
+	 * valid data.
+	 *
+	 * @throws DAOException if there is an issue with the DAO operation.
+	 */
 	@Test
 	public void testValidUpdateParkingPlace() throws DAOException {
 		TestParkingPlaceService placeservice = new TestParkingPlaceService();
 		Assertions.assertTrue(ParkingPlaceService.updateParkingPlace(placeservice.parkinPlace()));
 	}
-	
-	// Test to validate the deleteParkingPlace method of ParkingPlaceService for valid data
+
+	/**
+	 * Test to validate the deleteParkingPlace method of ParkingPlaceService for
+	 * valid data.
+	 *
+	 * @throws DAOException if there is an issue with the DAO operation.
+	 */
 	@Test
 	public void testValidDeleteParkingPlace() throws DAOException {
 		Assertions.assertTrue(ParkingPlaceService.deleteParkingPlace(3));
 	}
-	
-	// Test to validate the readParkingPlace method of ParkingPlaceService for valid data
+
+	/**
+	 * Test to validate the readParkingPlace method of ParkingPlaceService for valid
+	 * data.
+	 *
+	 * @throws DAOException if there is an issue with the DAO operation.
+	 * @throws SQLException if there is an issue with SQL operations.
+	 */
 	@Test
 	public void testValidReadAllParkingPlaces() throws DAOException, SQLException {
 		ParkingPlaceService parkingservice = new ParkingPlaceService();

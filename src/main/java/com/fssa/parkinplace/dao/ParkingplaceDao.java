@@ -91,7 +91,7 @@ public class ParkingplaceDao {
 				int row = place.executeUpdate();
              
 				// Return true if the update was successful
-				return row > 0?true:false;
+				return row > 0? true : false;
 			}
 		} catch (SQLException e) {
 			// If an SQLException occurs, throw a DAOException with a custom error message

@@ -21,8 +21,8 @@ public class TestParkingPlaceDao {
 	 */
 	public static ParkingPlace testValidParkingPlace() {
 		ParkingPlace place = new ParkingPlace();
-		place.setId(1);
-		place.setPlaceownername("Balaji");
+		place.setId(5);
+		place.setPlaceownername("Srikannan");
 		place.setAddress("25,kambarstreet");
 		place.setLocality("Taramani");
 		place.setMapurl("https://maps.app.goo.gl/xNbnms9FCoKySDEs5");
@@ -74,7 +74,7 @@ public class TestParkingPlaceDao {
 	 */
 	@Test
 	 void testValidDeleteParkingPlace() throws DAOException {
-		Assertions.assertTrue(ParkingplaceDao.deleteParkingPlace(testValidParkingPlace().getId()));
+		Assertions.assertTrue(ParkingplaceDao.deleteParkingPlace(1));
 	}
 
 	/**

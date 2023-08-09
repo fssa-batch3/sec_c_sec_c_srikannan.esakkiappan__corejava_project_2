@@ -21,7 +21,7 @@ public class TestParkingPlaceDao {
 	 */
 	public static ParkingPlace testValidParkingPlace() {
 		ParkingPlace place = new ParkingPlace();
-		place.setId(5);
+		place.setId(2);
 		place.setPlaceownername("Srikannan");
 		place.setAddress("25,kambarstreet");
 		place.setLocality("Taramani");

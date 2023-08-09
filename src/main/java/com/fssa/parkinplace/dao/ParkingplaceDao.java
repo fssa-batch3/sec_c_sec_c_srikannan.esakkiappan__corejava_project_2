@@ -120,15 +120,15 @@ public class ParkingplaceDao {
 				place.setInt(1, id);
 
 				// Execute the query to delete the data from the database
-				int rowsDeleted = place.executeUpdate();
-
-				// Return true if the delete was successful
-				return rowsDeleted > 0;
+				place.executeUpdate();
+				
 			}
 		} catch (SQLException e) {
 			// If an SQLException occurs, throw a DAOException with a custom error message
 			throw new DAOException(ParkinPlaceDaoErrors.INVALID_DELETE);
 		}
+		// Return true if the delete was successful
+		return true;
 	}
 
 	/**

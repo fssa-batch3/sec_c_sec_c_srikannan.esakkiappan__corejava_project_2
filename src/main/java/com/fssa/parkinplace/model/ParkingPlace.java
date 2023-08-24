@@ -15,6 +15,7 @@ public class ParkingPlace {
     private String lattitude;
     private String longitude;
 
+
     /**
      * Constructs a ParkingPlace object with provided details.
      *
@@ -48,7 +49,7 @@ public class ParkingPlace {
      * Constructs a default ParkingPlace object.
      */
     public ParkingPlace() {
-        // TODO Auto-generated constructor stub
+
     }
     
     

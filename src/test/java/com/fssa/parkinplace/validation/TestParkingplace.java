@@ -27,6 +27,7 @@ public class TestParkingplace {
 		return invalidParking;
 	}
 
+	
 	/**
 	 * Method to create and return a valid ParkingPlace object for testing.
 	 *
@@ -80,7 +81,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestId() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidateId(park.getId()));
+		Assertions.assertTrue(ParkingPlaceValidation.validateId(park.getId()));
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class TestParkingplace {
 	 void inValidTestId() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidateId(invalidPark.getId());
+			ParkingPlaceValidation.validateId(invalidPark.getId());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_ID, e.getMessage());
 		}
@@ -104,7 +105,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestOwnerName() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidatePlaceOwnerName(park.getPlaceownername()));
+		Assertions.assertTrue(ParkingPlaceValidation.validatePlaceOwnerName(park.getPlaceownername()));
 	}
 
 	/**
@@ -114,13 +115,13 @@ public class TestParkingplace {
 	 void inValidTestOwnerName() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidatePlaceOwnerName(invalidPark.getPlaceownername());
+			ParkingPlaceValidation.validatePlaceOwnerName(invalidPark.getPlaceownername());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PLACEOWNERNAME, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidatePlaceOwnerName("67sri");
+			ParkingPlaceValidation.validatePlaceOwnerName("67sri");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PLACEOWNERNAME, e.getMessage());
 		}
@@ -134,7 +135,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestAddress() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidateAddress(park.getAddress()));
+		Assertions.assertTrue(ParkingPlaceValidation.validateAddress(park.getAddress()));
 	}
 
 	/**
@@ -144,13 +145,13 @@ public class TestParkingplace {
 	 void inValidTestAddress() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidateAddress(invalidPark.getAddress());
+			ParkingPlaceValidation.validateAddress(invalidPark.getAddress());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_ADDRESS, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidateAddress("@1y");
+			ParkingPlaceValidation.validateAddress("@1y");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_ADDRESS_LENGTH, e.getMessage());
 		}
@@ -164,7 +165,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestLocality() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidateLocality(park.getLocality()));
+		Assertions.assertTrue(ParkingPlaceValidation.validateLocality(park.getLocality()));
 		
 	}
 
@@ -175,13 +176,13 @@ public class TestParkingplace {
 	 void inValidTestLocality() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidateLocality(invalidPark.getLocality());
+			ParkingPlaceValidation.validateLocality(invalidPark.getLocality());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_LOCALITY, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidateLocality("@#$jhry");
+			ParkingPlaceValidation.validateLocality("@#$jhry");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_LOCALITY, e.getMessage());
 		}
@@ -195,7 +196,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestMapUrl() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidateMapUrl(park.getMapurl()));
+		Assertions.assertTrue(ParkingPlaceValidation.validateMapUrl(park.getMapurl()));
 	}
 
 	/**
@@ -205,13 +206,13 @@ public class TestParkingplace {
 	 void inValidTestMapUrl() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidateMapUrl(invalidPark.getMapurl());
+			ParkingPlaceValidation.validateMapUrl(invalidPark.getMapurl());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_MAPURL, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidateMapUrl("@#$jhry");
+			ParkingPlaceValidation.validateMapUrl("@#$jhry");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_MAPURL, e.getMessage());
 		}
@@ -225,7 +226,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestPhotoUrl() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidatePlacePhotoUrl(park.getPlacephotourl()));
+		Assertions.assertTrue(ParkingPlaceValidation.validatePlacePhotoUrl(park.getPlacephotourl()));
 	}
 
 	/**
@@ -235,13 +236,13 @@ public class TestParkingplace {
 	 void inValidTestPhotoUrl() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidatePlacePhotoUrl(invalidPark.getPlacephotourl());
+			ParkingPlaceValidation.validatePlacePhotoUrl(invalidPark.getPlacephotourl());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PLACEPHOTOURL, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidatePlacePhotoUrl("@#$jhry");
+			ParkingPlaceValidation.validatePlacePhotoUrl("@#$jhry");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PLACEPHOTOURL, e.getMessage());
 		}
@@ -255,7 +256,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestProofDocUrl() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidateProofDocUrl(park.getProofdocurl()));
+		Assertions.assertTrue(ParkingPlaceValidation.validateProofDocUrl(park.getProofdocurl()));
 	}
 
 	/**
@@ -265,13 +266,13 @@ public class TestParkingplace {
 	 void inValidTestProofDocUrl() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidateProofDocUrl(invalidPark.getProofdocurl());
+			ParkingPlaceValidation.validateProofDocUrl(invalidPark.getProofdocurl());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PROOFDOCUMENTURL, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidateProofDocUrl("@#$jhry");
+			ParkingPlaceValidation.validateProofDocUrl("@#$jhry");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PROOFDOCUMENTURL, e.getMessage());
 		}
@@ -285,7 +286,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestLattitude() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidateLattitude(park.getLattitude()));
+		Assertions.assertTrue(ParkingPlaceValidation.validateLattitude(park.getLattitude()));
 	}
 
 	/**
@@ -295,13 +296,13 @@ public class TestParkingplace {
 	 void inValidTestLattitude() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidateLattitude(invalidPark.getLattitude());
+			ParkingPlaceValidation.validateLattitude(invalidPark.getLattitude());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_LATTITUDE, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidateLattitude("@#$jhry");
+			ParkingPlaceValidation.validateLattitude("@#$jhry");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_LATTITUDE, e.getMessage());
 		}
@@ -315,7 +316,7 @@ public class TestParkingplace {
 	@Test
 	 void validTestLongitude() throws InvalidParkingPlaceException {
 		ParkingPlace park = TestParkingplace.testValidParkingPlace();
-		Assertions.assertTrue(ParkingPlaceValidation.ValidateLongitude(park.getLongitude()));
+		Assertions.assertTrue(ParkingPlaceValidation.validateLongitude(park.getLongitude()));
 	}
 
 	/**
@@ -325,13 +326,13 @@ public class TestParkingplace {
 	 void inValidTestLongitude() {
 		ParkingPlace invalidPark = TestParkingplace.testInvalidParkingPlace();
 		try {
-			ParkingPlaceValidation.ValidateLongitude(invalidPark.getLongitude());
+			ParkingPlaceValidation.validateLongitude(invalidPark.getLongitude());
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_LONGITUDE, e.getMessage());
 		}
 
 		try {
-			ParkingPlaceValidation.ValidateLongitude("@#$jhry");
+			ParkingPlaceValidation.validateLongitude("@#$jhry");
 		} catch (ParkinPlaceException e) {
 			Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_LONGITUDE, e.getMessage());
 		}

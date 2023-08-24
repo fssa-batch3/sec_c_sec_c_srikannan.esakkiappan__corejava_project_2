@@ -16,9 +16,10 @@ public class ParkingPlaceValidation {
 
 	private ParkingPlaceValidation() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
+	
 	/**
 	 * Validates all the properties of a ParkingPlace object.
 	 *
@@ -32,15 +33,15 @@ public class ParkingPlaceValidation {
 			throw new ParkinPlaceException(ParkinPlaceValitationErrors.INVALID_OBJECT_NULL);
 		}
 
-		ValidateId(parkin.getId());
-		ValidatePlaceOwnerName(parkin.getPlaceownername());
-		ValidateAddress(parkin.getAddress());
-		ValidateLocality(parkin.getLocality());
-		ValidateMapUrl(parkin.getMapurl());
-		ValidatePlacePhotoUrl(parkin.getPlacephotourl());
-		ValidateProofDocUrl(parkin.getProofdocurl());
-		ValidateLattitude(parkin.getLattitude());
-		ValidateLongitude(parkin.getLongitude());
+		validateId(parkin.getId());
+		validatePlaceOwnerName(parkin.getPlaceownername());
+		validateAddress(parkin.getAddress());
+		validateLocality(parkin.getLocality());
+		validateMapUrl(parkin.getMapurl());
+		validatePlacePhotoUrl(parkin.getPlacephotourl());
+		validateProofDocUrl(parkin.getProofdocurl());
+		validateLattitude(parkin.getLattitude());
+		validateLongitude(parkin.getLongitude());
 
 		return true;
 	}
@@ -52,7 +53,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidateId(int id) throws ParkinPlaceException {
+	public static boolean validateId(int id) throws ParkinPlaceException {
 		// Check if the ID is 0, which indicates an invalid ID
 		if (id == 0) {
 			throw new ParkinPlaceException(ParkinPlaceValitationErrors.INVALID_ID);
@@ -69,7 +70,7 @@ public class ParkingPlaceValidation {
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
 
-	public static boolean ValidatePlaceOwnerName(String placeownername) throws ParkinPlaceException {
+	public static boolean validatePlaceOwnerName(String placeownername) throws ParkinPlaceException {
 		// Check if the PlaceOwnerName is null, empty, or too short (less than 2
 		// characters)
 		if (placeownername == null || "".equals(placeownername.trim()) || placeownername.length() < 2) {
@@ -97,7 +98,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidateAddress(String address) throws ParkinPlaceException {
+	public static boolean validateAddress(String address) throws ParkinPlaceException {
 		// Check if the Address is null or empty
 		if (address == null || "".equals(address.trim())) {
 			throw new ParkinPlaceException(ParkinPlaceValitationErrors.INVALID_ADDRESS);
@@ -124,7 +125,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidateLocality(String locality) throws ParkinPlaceException {
+	public static boolean validateLocality(String locality) throws ParkinPlaceException {
 		// Check if the Locality is null, empty, or too short (less than 2 characters)
 		if (locality == null || "".equals(locality.trim()) || locality.length() < 2) {
 			throw new ParkinPlaceException(ParkinPlaceValitationErrors.INVALID_LOCALITY);
@@ -151,7 +152,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidateMapUrl(String mapurl) throws ParkinPlaceException {
+	public static boolean validateMapUrl(String mapurl) throws ParkinPlaceException {
 		// Check if the MapUrl is null, empty, or too short (less than 2 characters)
 		if (mapurl == null || "".equals(mapurl.trim()) || mapurl.length() < 2) {
 			throw new ParkinPlaceException(ParkinPlaceValitationErrors.INVALID_MAPURL);
@@ -177,7 +178,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidatePlacePhotoUrl(String placephotourl) throws ParkinPlaceException {
+	public static boolean validatePlacePhotoUrl(String placephotourl) throws ParkinPlaceException {
 		// Check if the PlacePhotoUrl is null, empty, or too short (less than 2
 		// characters)
 		if (placephotourl == null || "".equals(placephotourl.trim()) || placephotourl.length() < 2) {
@@ -205,7 +206,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidateProofDocUrl(String proofdocurl) throws ParkinPlaceException {
+	public static boolean validateProofDocUrl(String proofdocurl) throws ParkinPlaceException {
 		// Check if the ProofDocUrl is null, empty, or too short (less than 2
 		// characters)
 		if (proofdocurl == null || "".equals(proofdocurl.trim()) || proofdocurl.length() < 2) {
@@ -232,7 +233,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidateLattitude(String lattitude) throws ParkinPlaceException {
+	public static boolean validateLattitude(String lattitude) throws ParkinPlaceException {
 		// Check if the Lattitude is null, empty, or too short (less than 2 characters)
 		if (lattitude == null || "".equals(lattitude.trim()) || lattitude.length() < 2) {
 			throw new ParkinPlaceException(ParkinPlaceValitationErrors.INVALID_LATTITUDE);
@@ -259,7 +260,7 @@ public class ParkingPlaceValidation {
 	 * @return True if the validation passes.
 	 * @throws ParkinPlaceException if there is an issue with the validation.
 	 */
-	public static boolean ValidateLongitude(String longitude) throws ParkinPlaceException {
+	public static boolean validateLongitude(String longitude) throws ParkinPlaceException {
 		// Check if the Longitude is null, empty, or too short (less than 2 characters)
 		if (longitude == null || "".equals(longitude.trim()) || longitude.length() < 2) {
 			throw new ParkinPlaceException(ParkinPlaceValitationErrors.INVALID_LONGITUDE);

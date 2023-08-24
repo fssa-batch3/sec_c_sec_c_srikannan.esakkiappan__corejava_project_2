@@ -33,6 +33,7 @@ public class TestParkingPlaceDao {
 		return place;
 	}
 
+	
 	/**
 	 * Method to create and return an invalid ParkingPlace object for testing.
 	 *

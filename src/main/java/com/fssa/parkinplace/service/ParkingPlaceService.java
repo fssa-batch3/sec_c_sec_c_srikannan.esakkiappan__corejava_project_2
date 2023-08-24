@@ -16,9 +16,10 @@ public class ParkingPlaceService {
 
 	ParkingPlaceService() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
+	
 	/**
 	 * Adds a new ParkingPlace to the database.
 	 *
@@ -36,7 +37,6 @@ public class ParkingPlaceService {
 		// Return true if the operation was successful
 		return true;
 	}
-
 	/**
 	 * Updates an existing ParkingPlace in the database.
 	 *
@@ -67,7 +67,7 @@ public class ParkingPlaceService {
 		
 		// Validate the ID using the ParkingPlaceValidation class
 		
-		if (ParkingPlaceValidation.ValidateId(id)) {
+		if (ParkingPlaceValidation.validateId(id)) {
 			// If the ID is valid, call the deleteParkingPlace method from the DAO to delete
 			// the data from the database
 			ParkingplaceDao.deleteParkingPlace(id);

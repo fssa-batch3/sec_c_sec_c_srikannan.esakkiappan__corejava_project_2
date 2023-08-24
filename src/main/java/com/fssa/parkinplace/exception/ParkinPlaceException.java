@@ -12,3 +12,4 @@ public class ParkinPlaceException extends RuntimeException {
 		super(message);
 	}
 }
+

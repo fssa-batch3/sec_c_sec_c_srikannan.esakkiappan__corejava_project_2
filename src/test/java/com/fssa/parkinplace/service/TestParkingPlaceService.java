@@ -12,7 +12,7 @@ import com.fssa.parkinplace.model.ParkingPlace;
 /**
  * Test class to perform unit tests for the ParkingPlaceService class.
  */
-public class TestParkingPlaceService {
+ class TestParkingPlaceService {
 
 	/**
 	 * Method to create and return a valid ParkingPlace object for testing.
@@ -33,6 +33,7 @@ public class TestParkingPlaceService {
 		return p1;
 	}
 
+	
 	/**
 	 * Test to validate the addParkingPlace method of ParkingPlaceService for valid
 	 * data.

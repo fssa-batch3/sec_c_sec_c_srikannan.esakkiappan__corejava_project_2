@@ -1,7 +1,11 @@
 package com.fssa.parkinplace.errors;
 
-public interface ParkinPlaceValitationErrors {
+public class ParkinPlaceValitationErrors {
 	
+	private ParkinPlaceValitationErrors() {
+		super();
+	}
+
 	public static final String INVALID_OBJECT_NULL = "Argument cannot be null";
 	
 	public static final String INVALID_ID = "Id is: Invalid";

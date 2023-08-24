@@ -27,13 +27,14 @@ public class ParkingplaceDao {
      */
 	
 	public static boolean addParkingPlace(ParkingPlace parkin) throws DAOException {
-
+		
 		// SQL query to insert a new row into the "parkingplace" table
 		final String query = "INSERT INTO parkingplace (placeownername, address , locality , mapurl , placephotourl , proofdocurl , lattitude , longitude) VALUES(?,?,?,?,?,?,?,?);";
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 			// Using try-with-resources to automatically close the resources (Connection and PreparedStatement)
 
+			
 			try (PreparedStatement place = connection.prepareStatement(query)) {
 				// Set the values for the PreparedStatement using the ParkingPlace object
 				place.setString(1, parkin.getPlaceownername());
@@ -50,7 +51,7 @@ public class ParkingplaceDao {
 
 				// Print a success message and return true if the insertion was successful
 				Logger.info("Parking place Added Successfully");
-				return (row > 0) ? true : false;
+				return (row > 0);
 			}
 
 		} catch (SQLException e) {
@@ -91,7 +92,7 @@ public class ParkingplaceDao {
 				int row = place.executeUpdate();
              
 				// Return true if the update was successful
-				return row > 0? true : false;
+				return row > 0;
 			}
 		} catch (SQLException e) {
 			// If an SQLException occurs, throw a DAOException with a custom error message
@@ -167,7 +168,7 @@ public class ParkingplaceDao {
 
 	private ParkingplaceDao() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 }

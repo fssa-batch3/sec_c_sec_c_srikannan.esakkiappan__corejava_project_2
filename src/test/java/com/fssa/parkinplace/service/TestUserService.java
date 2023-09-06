@@ -22,12 +22,12 @@ class TestUserService {
     public User userDetails() {
         User p1 = new User(); 
         p1.setId(4); 
-        p1.setFirstName("Raju");
-        p1.setpPhoneNum("9617728611");
-        p1.setEmail("raju.2003@gmail.com");
-        p1.setAddress("89,2ndMainRd,KothariNagar,Ramapuram,Chennai");
-        p1.setPassword("Raaj@2003");
-        p1.setMapurl("https://maps.app.goo.gl/xNbnms9FCoKySDEs5");
+        p1.setFirstName("Sri");
+        p1.setpPhoneNum("8617728611");
+        p1.setEmail("sri.2003@gmail.com");
+        p1.setAddress("MahathmaGandhiNagar,Tharamani");
+        p1.setPassword("Srik@2003");
+        p1.setMapurl("https://maps.app.goo.gl/Mr8fd3QVjYEJHqGE9");
         p1.setPlacephotourl("https://iili.io/Hv6nj0x.jpg");
 
         return p1;

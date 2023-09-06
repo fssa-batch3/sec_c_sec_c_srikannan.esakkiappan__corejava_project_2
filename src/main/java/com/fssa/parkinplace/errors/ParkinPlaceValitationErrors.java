@@ -16,13 +16,11 @@ public class ParkinPlaceValitationErrors {
 	
 	public static final String INVALID_ADDRESS_LENGTH = "Address should be in minimum 5 letters and maximum 30 letters";
 	
-	public static final String INVALID_LOCALITY = "locality is: Invalid";
+	public static final String INVALID_PHONENUMBER = "PhoneNumber is: Invalid";
 	
 	public static final String INVALID_MAPURL = "mapurl is: Invalid";
 	
 	public static final String INVALID_PLACEPHOTOURL = "placephotourl is: Invalid";
-	
-	public static final String INVALID_PROOFDOCUMENTURL = "proofdocurl is: Invalid";
 	
 	public static final String INVALID_LATTITUDE = "lattitude is: Invalid";
 	

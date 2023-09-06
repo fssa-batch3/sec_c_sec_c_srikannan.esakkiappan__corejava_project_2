@@ -1,15 +1,14 @@
-USE srikannan_esakkiappan_corejava_project;
+USE parkin_java;
 
-CREATE TABLE IF NOT EXISTS parkingplace (
+CREATE TABLE IF NOT EXISTS userdetails (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-    placeownername VARCHAR(15) NOT NULL,
-    address VARCHAR(35) NOT NULL,
-    locality VARCHAR(15) NOT NULL,
-    mapurl VARCHAR(150) NOT NULL ,
-    placephotourl VARCHAR(150) NOT NULL,
-    proofdocurl VARCHAR(150) NOT NULL,
-    lattitude DOUBLE NOT NULL,
-    longitude DOUBLE NOT NULL	
-);
+    name VARCHAR(15) NOT NULL,
+    email VARCHAR(50)  NOT NULL UNIQUE,
+    address VARCHAR(120) NOT NULL,
+    phonenumber VARCHAR(15) NOT NULL,
+    password VARCHAR(15) NOT NULL,
+    mapurl VARCHAR(150)  NOT NULL UNIQUE,
+    placephotourl VARCHAR(150) NOT NULL
+); 
 
-Select * from parkingplace;
+SELECT * FROM userdetails;

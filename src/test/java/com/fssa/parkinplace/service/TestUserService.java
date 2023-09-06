@@ -25,9 +25,9 @@ class TestUserService {
         p1.setFirstName("Raj");
         p1.setpPhoneNum("9618728611");
         p1.setEmail("rajan.2003@gmail.com");
-        p1.setAddress("Muthu Kumaran Nagar,Poonamallee,");
+        p1.setAddress("ParthasarathiPuram,T.Nagar,Chennai");
         p1.setPassword("Sri@2003");
-        p1.setMapurl("https://maps.app.goo.gl/orndAzptj1YPPHwf6");
+        p1.setMapurl("https://maps.app.goo.gl/kJ7erasDKda9D8LYA");
         p1.setPlacephotourl("https://iili.io/HUN8VHX.jpg");
 
         return p1;

@@ -3,7 +3,6 @@ package com.fssa.parkinplace.validation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.parkinplace.errors.ParkinPlaceValitationErrors;
 import com.fssa.parkinplace.errors.UserValidatorErrors;
 import com.fssa.parkinplace.exception.InvalidUserException;
 import com.fssa.parkinplace.exception.UserException;
@@ -139,13 +138,13 @@ public class TestUserValidator {
         try {
             UserValidator.validateAddress(invaliddatas.getEmail());
         } catch (UserException e) {
-            Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_ADDRESS, e.getMessage());
+            Assertions.assertEquals(UserValidatorErrors.INVALID_ADDRESS, e.getMessage());
         }
 
         try {
             UserValidator.validateAddress("@1y");
         } catch (UserException e) {
-            Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_ADDRESS_LENGTH, e.getMessage());
+            Assertions.assertEquals(UserValidatorErrors.INVALID_ADDRESS_LENGTH, e.getMessage());
         }
     }
 
@@ -224,13 +223,13 @@ public class TestUserValidator {
         try {
             UserValidator.validateMapUrl(invaliddatas.getMapurl());
         } catch (UserException e) {
-            Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_MAPURL, e.getMessage());
+            Assertions.assertEquals(UserValidatorErrors.INVALID_MAPURL, e.getMessage());
         }
 
         try {
             UserValidator.validateMapUrl("@#$jhry");
         } catch (UserException e) {
-            Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_MAPURL, e.getMessage());
+            Assertions.assertEquals(UserValidatorErrors.INVALID_MAPURL, e.getMessage());
         }
     }
 
@@ -251,16 +250,16 @@ public class TestUserValidator {
     @Test
     void inValidTestPhotoUrl() {
         User invaliddatas = TestUserValidator.testInvalidUser();
-        try {
+        try { 
             UserValidator.validatePlacePhotoUrl(invaliddatas.getPlacephotourl());
         } catch (UserException e) {
-            Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PLACEPHOTOURL, e.getMessage());
+            Assertions.assertEquals(UserValidatorErrors.INVALID_PLACEPHOTOURL, e.getMessage());
         }
 
         try {
             UserValidator.validatePlacePhotoUrl("@#$jhry");
         } catch (UserException e) {
-            Assertions.assertEquals(ParkinPlaceValitationErrors.INVALID_PLACEPHOTOURL, e.getMessage());
+            Assertions.assertEquals(UserValidatorErrors.INVALID_PLACEPHOTOURL, e.getMessage());
         }
     }
 }

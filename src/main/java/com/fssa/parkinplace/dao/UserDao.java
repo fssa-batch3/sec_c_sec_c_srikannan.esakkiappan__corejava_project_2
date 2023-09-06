@@ -184,7 +184,7 @@ public class UserDao {
                         userData.setPlacephotourl(rs.getString("placephotourl"));
 
                         user.add(userData);
-
+ 
                     }
                     // Return the list of users
                     return user;

@@ -3,7 +3,6 @@ package com.fssa.parkinplace.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.parkinplace.errors.ParkinPlaceValitationErrors;
 import com.fssa.parkinplace.errors.UserValidatorErrors;
 import com.fssa.parkinplace.exception.UserException;
 import com.fssa.parkinplace.model.User;
@@ -82,7 +81,7 @@ public class UserValidator {
         }
     }
 
-    /**
+    /** 
      * Validates a user's address.
      *
      * @param address The address to be validated.
@@ -92,7 +91,7 @@ public class UserValidator {
     public static boolean validateAddress(String address) throws UserException {
         // Check if the Address is null or empty
         if (address == null || "".equals(address.trim())) {
-            throw new UserException(ParkinPlaceValitationErrors.INVALID_ADDRESS);
+            throw new UserException(UserValidatorErrors.INVALID_ADDRESS);
         }
 
         // Regular expression to validate the Address format (at least one non-space
@@ -104,7 +103,7 @@ public class UserValidator {
 
         // Check if the Address matches the regular expression pattern
         if (Boolean.FALSE.equals(isMatch)) {
-            throw new UserException(ParkinPlaceValitationErrors.INVALID_ADDRESS_LENGTH);
+            throw new UserException(UserValidatorErrors.INVALID_ADDRESS_LENGTH);
         }
         return true;
     }
@@ -119,7 +118,7 @@ public class UserValidator {
     public static boolean validatePhoneNumber(String phonenum) throws UserException {
 
         if (phonenum == null || "".equals(phonenum.trim()) || phonenum.length() < 2) {
-            throw new UserException(ParkinPlaceValitationErrors.INVALID_PHONENUMBER);
+            throw new UserException(UserValidatorErrors.INVALID_PHONENUMBER);
         }
 
         String regex = "[6789][0-9]{9}";
@@ -165,7 +164,7 @@ public class UserValidator {
     public static boolean validateMapUrl(String mapurl) throws UserException {
         // Check if the MapUrl is null, empty, or too short (less than 2 characters)
         if (mapurl == null || "".equals(mapurl.trim()) || mapurl.length() < 2) {
-            throw new UserException(ParkinPlaceValitationErrors.INVALID_MAPURL);
+            throw new UserException(UserValidatorErrors.INVALID_MAPURL);
         }
 
         // Regular expression to validate the MapUrl format (should be a valid URL)
@@ -176,7 +175,7 @@ public class UserValidator {
 
         // Check if the MapUrl matches the regular expression pattern
         if (Boolean.FALSE.equals(isMatch)) {
-            throw new UserException(ParkinPlaceValitationErrors.INVALID_MAPURL);
+            throw new UserException(UserValidatorErrors.INVALID_MAPURL);
         }
         return true;
     }
@@ -192,7 +191,7 @@ public class UserValidator {
         // Check if the PlacePhotoUrl is null, empty, or too short (less than 2
         // characters)
         if (placephotourl == null || "".equals(placephotourl.trim()) || placephotourl.length() < 2) {
-            throw new UserException(ParkinPlaceValitationErrors.INVALID_PLACEPHOTOURL);
+            throw new UserException(UserValidatorErrors.INVALID_PLACEPHOTOURL);
         }
 
         // Regular expression to validate the PlacePhotoUrl format (should be a valid
@@ -204,7 +203,7 @@ public class UserValidator {
 
         // Check if the PlacePhotoUrl matches the regular expression pattern
         if (Boolean.FALSE.equals(isMatch)) {
-            throw new UserException(ParkinPlaceValitationErrors.INVALID_PLACEPHOTOURL);
+            throw new UserException(UserValidatorErrors.INVALID_PLACEPHOTOURL);
         }
         return true;
     }

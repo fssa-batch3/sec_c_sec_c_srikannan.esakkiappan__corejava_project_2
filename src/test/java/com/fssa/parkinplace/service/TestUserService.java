@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.logger.Logger;
 import com.fssa.parkinplace.exception.DAOException;
 import com.fssa.parkinplace.model.User;
 
@@ -22,13 +21,13 @@ class TestUserService {
      */
     public User userDetails() {
         User p1 = new User(); 
-        p1.setId(4);
+        p1.setId(4); 
         p1.setFirstName("Raj");
         p1.setpPhoneNum("9618728611");
-        p1.setEmail("rajkumar.2003@gmail.com");
+        p1.setEmail("rajan.2003@gmail.com");
         p1.setAddress("Muthu Kumaran Nagar,Poonamallee,");
         p1.setPassword("Sri@2003");
-        p1.setMapurl("https://maps.app.goo.gl/VsbuHVFbcBhrsXks9");
+        p1.setMapurl("https://maps.app.goo.gl/orndAzptj1YPPHwf6");
         p1.setPlacephotourl("https://iili.io/HUN8VHX.jpg");
 
         return p1;

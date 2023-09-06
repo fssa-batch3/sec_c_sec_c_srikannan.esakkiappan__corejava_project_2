@@ -42,7 +42,7 @@ class TestUserService {
     public User updateUserDetails() {
         User p1 = new User();
         p1.setId(2);
-        p1.setFirstName("Srik");
+        p1.setFirstName("Srikannan");
         p1.setpPhoneNum("9655221849");
         p1.setEmail("srikannan.2004@gmail.com");
         p1.setAddress("25,RaniyammalNagar,Taramani");

@@ -22,7 +22,7 @@ public class TestUserValidator {
         User invalidUser = new User(null, null, null, null, null, null, null);
         return invalidUser;
     }
-
+ 
     /**
      * Creates a valid user for testing purposes.
      *
@@ -183,7 +183,7 @@ public class TestUserValidator {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validatePassword(datas.getPassword()));
     }
-
+ 
     /**
      * Tests the validation of an invalid password.
      */

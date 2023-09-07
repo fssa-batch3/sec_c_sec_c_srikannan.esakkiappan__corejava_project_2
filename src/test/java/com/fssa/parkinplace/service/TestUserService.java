@@ -21,14 +21,14 @@ class TestUserService {
      */
     public User userDetails() {
         User p1 = new User(); 
-        p1.setId(4); 
+        p1.setId(1); 
         p1.setFirstName("Sri");
         p1.setpPhoneNum("8617728611");
         p1.setEmail("sri.2003@gmail.com");
         p1.setAddress("MahathmaGandhiNagar,Tharamani");
         p1.setPassword("Srik@2003");
         p1.setMapurl("https://maps.app.goo.gl/Mr8fd3QVjYEJHqGE9");
-        p1.setPlacephotourl("https://iili.io/Hv6nj0x.jpg");
+        p1.setPlacephotourl("https://iili.io/HUN8VHX.jpg");
 
         return p1;
     }
@@ -40,14 +40,14 @@ class TestUserService {
      */
     public User updateUserDetails() {
         User p1 = new User();
-        p1.setId(2);
-        p1.setFirstName("Srikannan");
+//        p1.setId(2);
+        p1.setFirstName("Sakthi");
         p1.setpPhoneNum("9655221849");
-        p1.setEmail("srikannan.2004@gmail.com");
-        p1.setAddress("25,RaniyammalNagar,Taramani");
-        p1.setPassword("Sri@2003");
-        p1.setMapurl("https://maps.app.goog.gl/xNnms9FCoKySDE2");
-        p1.setPlacephotourl("https://iili.io/HUN8VHX.jpg");
+        p1.setEmail("sakthi2002@gmail.com");
+        p1.setAddress("89,2nd Main Rd,KothariNagar,Ramapuram,Chennai");
+        p1.setPassword("Sakthi@2003");
+        p1.setMapurl("https://maps.app.goo.gl/xNbnms9FCoKySDEs5");
+        p1.setPlacephotourl("https://iili.io/Hv6nOJV.jpg");
 
         return p1;
     }
@@ -83,7 +83,7 @@ class TestUserService {
     void testValidDeleteUser() throws DAOException {
         Assertions.assertTrue(UserService.deleteUser(userDetails().getUserId()));
     }
-
+ 
     /**
      * Tests the readUser method of UserService for valid user retrieval.
      *

@@ -14,7 +14,7 @@ import com.fssa.parkinplace.validation.UserValidator;
  */
 public class UserService {
 	
-	/**
+	/** 
 	 * Adds a new User to the database.
 	 *
 	 * @param user The User object to be added.

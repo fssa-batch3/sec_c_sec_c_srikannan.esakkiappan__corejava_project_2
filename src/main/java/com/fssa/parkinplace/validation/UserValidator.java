@@ -156,7 +156,7 @@ public class UserValidator {
 
     /**
      * Validates the MapUrl property of a ParkingPlace object.
-     *
+     * 
      * @param mapurl The MapUrl to be validated.
      * @return True if the validation passes.
      * @throws UserException if there is an issue with the validation.

@@ -2,20 +2,30 @@
 ## Parkin
 ### Database Design
 
-### parkingplace Table
+## userdetails Table
 
 | Column          | Data Type | Constraints                         |
 |-----------------|-----------|-------------------------------------|
 | id              | INT       | NOT NULL, AUTO_INCREMENT, PRIMARY KEY |
 | name            | VARCHAR   | NOT NULL                            |
+| email           | VARCHAR   | NOT NULL, UNIQUE                    |
 | address         | VARCHAR   | NOT NULL                            |
-| locality        | VARCHAR   | NOT NULL                            |
-| mapurl          | VARCHAR   | NOT NULL                            |
+| phonenumber     | VARCHAR   | NOT NULL                            |
+| password        | VARCHAR   | NOT NULL                            |
+| mapurl          | VARCHAR   | NOT NULL, UNIQUE                    |
 | placephotourl   | VARCHAR   | NOT NULL                            |
-| proofdocurl     | VARCHAR   | NOT NULL                            |
-| latitude        | DOUBLE    | NOT NULL                            |
-| longitude       | DOUBLE    | NOT NULL                            |
 
-### userdetails Table
+## Tenantdetails Table
+
+| Column          | Data Type | Constraints                         |
+|-----------------|-----------|-------------------------------------|
+| id              | INT       | NOT NULL, AUTO_INCREMENT, PRIMARY KEY |
+| name            | VARCHAR   | NOT NULL                            |
+| email           | VARCHAR   | NOT NULL, UNIQUE                    |
+| address         | VARCHAR   | NOT NULL                            |
+| phonenumber     | VARCHAR   | NOT NULL                            |
+| password        | VARCHAR   | NOT NULL                            |
+| bikephotourl    | VARCHAR   | NOT NULL                            |
+
 
 

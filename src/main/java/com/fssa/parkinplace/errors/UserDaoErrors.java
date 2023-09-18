@@ -7,7 +7,7 @@ public class UserDaoErrors {
 		
 	}
 
-	public static final String INVALID_INSERT = "Add user to the Database is Failed";
+	public static final String INVALID_INSERT = "Add user to the Database is Failed, check the input values";
 	
 	public static final String INVALID_UPDATE = "Update user in the Database is Failed";
 	

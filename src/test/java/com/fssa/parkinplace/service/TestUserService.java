@@ -20,27 +20,27 @@ class TestUserService {
      * @return A User object with sample details.
      */
     public User userDetails() {
-        User p1 = new User(); 
+        User p1 = new User(null, null, null, null, null, null); 
         p1.setId(1);  
         p1.setFirstName("Sri");
         p1.setpPhoneNum("8617728611");
         p1.setEmail("srik.2003@gmail.com");
-        p1.setAddress("MahathmaGandhiNagar,Tharamani");
+        p1.setAddress("15,MahathmaGandhiNagar,Tharamani");
         p1.setPassword("Srik@2003");
-        p1.setMapurl("https://maps.app.goo.gl/Mr8fd3QVjYEJHqGE1");
+        p1.setMapurl("https://maps.app.goo.gl/Mr8fd3QVjYEJHqGE91");
         p1.setPlacephotourl("https://iili.io/HUN8VHX.jpg");
 
-        return p1;
-    }
+        return p1; 
+    } 
 
     /**
      * Creates and returns a User object with updated sample details for testing.
-     *
+     * 
      * @return A User object with updated sample details.
      */
     public User updateUserDetails() {
-        User p1 = new User();
-        p1.setId(3);
+        User p1 = new User(null, null, null, null, null, null);
+        p1.setId(2);
         p1.setFirstName("Sakthi");
         p1.setpPhoneNum("9655221849");
         p1.setEmail("sakthi2002@gmail.com");
@@ -48,6 +48,32 @@ class TestUserService {
         p1.setPassword("Sakti@2003");
         p1.setMapurl("https://maps.app.goo.gl/xNbnms9FCoKySDEs5");
         p1.setPlacephotourl("https://iili.io/Hv6nOJV.jpg");
+
+        return p1;
+    }
+    
+    public User TenantDetails() {
+        User p1 = new User(null, null, null, null, null, null); 
+        p1.setId(1);  
+        p1.setFirstName("Dharunraj");
+        p1.setpPhoneNum("9817728611");
+        p1.setEmail("dharun2002@gmail.com");
+        p1.setAddress("15,MahathmaGandhiNagar,Guduvancheri");
+        p1.setPassword("Dhar@2003");
+        p1.setBikephotourl("https://iili.io/HUN8VHX.jpg");
+
+        return p1; 
+    }
+    
+    public User updateTenantDetails() {
+        User p1 = new User(null, null, null, null, null, null);
+        p1.setId(1);  
+        p1.setFirstName("Dharun");
+        p1.setpPhoneNum("9817728611");
+        p1.setEmail("dharun2002@gmail.com");
+        p1.setAddress("15,MahathmaGandhiNagar,Guduvancheri");
+        p1.setPassword("Dhar@2003");
+        p1.setBikephotourl("https://iili.io/HUN8VHX.jpg");
 
         return p1;
     }
@@ -63,7 +89,7 @@ class TestUserService {
         Assertions.assertTrue(UserService.addUser(userservice.userDetails()));
     }
 
-    /**
+    /** 
      * Tests the updateUser method of UserService for valid user update.
      *
      * @throws DAOException If a DAOException occurs during testing.
@@ -83,7 +109,7 @@ class TestUserService {
     void testValidDeleteUser() throws DAOException {
         Assertions.assertTrue(UserService.deleteUser(userDetails().getUserId()));
     }
- 
+  
     /**
      * Tests the readUser method of UserService for valid user retrieval.
      *
@@ -95,4 +121,28 @@ class TestUserService {
         List<User> list = UserService.readUser();
         Assertions.assertNotNull(list);
     }
+    
+    @Test
+    void testValidAddTenant() throws DAOException {
+        TestUserService userservice = new TestUserService();
+        Assertions.assertTrue(UserService.addTenant(userservice.TenantDetails()));
+    }
+    
+    @Test
+    void testValidUpdateTenant() throws DAOException {
+        TestUserService userservice = new TestUserService();
+        Assertions.assertTrue(UserService.updateTenant(userservice.updateTenantDetails()));
+    }
+     
+    @Test
+    void testValidDeleteTenant() throws DAOException {
+        Assertions.assertTrue(UserService.deleteTenant(TenantDetails().getUserId()));
+    }
+    
+    @Test
+    void testValidReadTenant() throws DAOException, SQLException {
+        List<User> list = UserService.readTenant();
+        Assertions.assertNotNull(list);
+    }
+    
 }

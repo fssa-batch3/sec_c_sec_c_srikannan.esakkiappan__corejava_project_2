@@ -22,14 +22,30 @@ public class TestUserValidator {
         User invalidUser = new User(null, null, null, null, null, null, null);
         return invalidUser;
     }
+    
+    public static User testInvalidTenant() {
+        User invalidTenant = new User(null, null, null, null, null, null);
+        return invalidTenant;
+    }
+    
+    public static User testValidTenant() { 
+        User details = new User(null, null, null, null, null, null);
+        details.setFirstName("Ram");
+        details.setEmail("ram2003@gmail.com");
+        details.setAddress("25,Raniyammalnagar");
+        details.setpPhoneNum("9799085013");
+        details.setPassword("Sri@2003");
+        details.setBikephotourl("https://iili.io/HvUnGHX.jpg");
+        return details;
+    }
  
     /**
      * Creates a valid user for testing purposes.
      *
      * @return A valid user instance.
      */
-    public static User testValidUser() {
-        User details = new User();
+    public static User testValidUser() { 
+        User details = new User(null, null, null, null, null, null, null);
         details.setFirstName("Srikannan");
         details.setEmail("Srikann.2003@gmail.com");
         details.setAddress("25,Raniyammalnagar");
@@ -183,7 +199,7 @@ public class TestUserValidator {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validatePassword(datas.getPassword()));
     }
- 
+  
     /**
      * Tests the validation of an invalid password.
      */
@@ -262,4 +278,30 @@ public class TestUserValidator {
             Assertions.assertEquals(UserValidatorErrors.INVALID_PLACEPHOTOURL, e.getMessage());
         }
     }
+    
+//    ---------------------------------------------------------------------------
+    
+    
+    
+    @Test
+    void validTestBikePhotoUrl() throws InvalidUserException {
+        User datas = TestUserValidator.testValidTenant();
+        Assertions.assertTrue(UserValidator.validateBikePhotoUrl(datas.getBikephotourl()));
+    }
+    
+    @Test
+    void inValidTestBikePhotoUrl() {
+        User invaliddatas = TestUserValidator.testInvalidTenant();
+        try { 
+            UserValidator.validateBikePhotoUrl(invaliddatas.getBikephotourl());
+        } catch (UserException e) {
+            Assertions.assertEquals(UserValidatorErrors.INVALID_PLACEPHOTOURL, e.getMessage());
+        }
+
+        try {
+            UserValidator.validateBikePhotoUrl("@#$jhry");
+        } catch (UserException e) {
+            Assertions.assertEquals(UserValidatorErrors.INVALID_PLACEPHOTOURL, e.getMessage());
+        }
+    } 
 }

@@ -12,8 +12,11 @@ public class User {
     private String password;
     private String mapurl;
     private String placephotourl;
+    private String lattitude;
+    private String longitude;
+    private String bikephotourl;
 
-    /**
+    /** 
      * Constructs a User object with the specified attributes.
      *
      * @param name          The user's name.
@@ -35,15 +38,25 @@ public class User {
         this.mapurl = mapurl;
         this.placephotourl = placephotourl;
     }
+    
+    public User(String name, String address, String email, String phonenum, String password,String bikephotourl) {
+        super();
 
-    /**
-     * Constructs an empty User object.
-     */
-    public User() {
-
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phonenum = phonenum;
+        this.password = password;
+        this.mapurl = mapurl;
+        this.bikephotourl = bikephotourl;
     }
+    
 
-    /**
+    public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * Gets the user's ID.
      *
      * @return The user's ID.
@@ -68,7 +81,7 @@ public class User {
      */
     public String getFirstName() {
         return name;
-    }
+    } 
 
     /**
      * Sets the user's first name.
@@ -185,5 +198,15 @@ public class User {
      */
     public void setPlacephotourl(String placephotourl) {
         this.placephotourl = placephotourl;
+    }
+    
+    
+    
+    public String getBikephotourl() {
+    	return bikephotourl;
+    }
+    
+    public void setBikephotourl(String bikephotourl) {
+    	this.bikephotourl = bikephotourl;
     }
 }

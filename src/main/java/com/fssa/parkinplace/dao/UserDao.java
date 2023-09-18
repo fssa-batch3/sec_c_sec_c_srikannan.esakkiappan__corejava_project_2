@@ -16,7 +16,7 @@ import com.fssa.util.ConnectionUtil;
 
 /**
  * This class provides data access methods for interacting with the userdetails
- * table in the database.
+ * table in the database. 
  */
 public class UserDao {
 
@@ -37,9 +37,34 @@ public class UserDao {
 				data.setString(2, user.getEmail());
 				data.setString(3, user.getAddress());
 				data.setString(4, user.getPhoneNum());
-				data.setString(5, user.getPassword());
+				data.setString(5, user.getPassword()); 
 				data.setString(6, user.getMapurl());
 				data.setString(7, user.getPlacephotourl());
+
+				int row = data.executeUpdate();
+
+				// Print a success message and return true if the insertion was successful
+				return (row > 0);
+			}
+		} catch (SQLException e) {
+			Logger.info(e);
+			// If an SQLException occurs, throw a DAOException with a custom error message
+			throw new DAOException(UserDaoErrors.INVALID_INSERT);
+		}
+	}
+	
+	public static boolean addTenant(User user) throws DAOException {
+		final String query = "INSERT INTO Tenantdetails (name, email, address, phonenumber, password, bikephotourl) VALUES(?,?,?,?,?,?)";
+
+		try (Connection connection = ConnectionUtil.getConnection()) {
+
+			try (PreparedStatement data = connection.prepareStatement(query)) {
+				data.setString(1, user.getFirstName());
+				data.setString(2, user.getEmail());
+				data.setString(3, user.getAddress());
+				data.setString(4, user.getPhoneNum());
+				data.setString(5, user.getPassword()); 
+				data.setString(6, user.getBikephotourl());
 
 				int row = data.executeUpdate();
 
@@ -69,7 +94,7 @@ public class UserDao {
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
 			try (PreparedStatement data = connection.prepareStatement(query)) {
-
+ 
 				// Set the values for the PreparedStatement using the User object
 				data.setString(1, user.getFirstName());
 				data.setString(2, user.getEmail());
@@ -79,6 +104,39 @@ public class UserDao {
 				data.setString(6, user.getMapurl());
 				data.setString(7, user.getPlacephotourl());
 				data.setInt(8, id);
+
+				// Execute the query to update the data in the database
+				int row = data.executeUpdate();
+				
+				// Return true if the update was successful
+				return row > 0;
+			}
+		} catch (SQLException e) {
+			// If an SQLException occurs, throw a DAOException with a custom error message
+			throw new DAOException(UserDaoErrors.INVALID_UPDATE);
+
+		}
+
+	}
+	
+	public static boolean updateTenant(User user) throws DAOException {
+
+		int id = getUserIdByEmail(user.getEmail());
+
+		final String query = "UPDATE Tenantdetails SET name=?, email=?, address=?, phonenumber=?, password=?, bikephotourl=? WHERE id=?";
+
+		try (Connection connection = ConnectionUtil.getConnection()) {
+
+			try (PreparedStatement data = connection.prepareStatement(query)) {
+  
+				// Set the values for the PreparedStatement using the User object
+				data.setString(1, user.getFirstName());
+				data.setString(2, user.getEmail());
+				data.setString(3, user.getAddress());
+				data.setString(4, user.getPhoneNum());
+				data.setString(5, user.getPassword());
+				data.setString(6, user.getBikephotourl());
+				data.setInt(7, id);
 
 				// Execute the query to update the data in the database
 				int row = data.executeUpdate();
@@ -123,6 +181,29 @@ public class UserDao {
 		return true;
 	}
 
+	
+	public static boolean deleteTenant(int id) throws DAOException {
+
+		final String query = "DELETE FROM Tenantdetails WHERE id=?";
+
+		try (Connection connection = ConnectionUtil.getConnection()) {
+
+			try (PreparedStatement data = connection.prepareStatement(query)) {
+				// Set the value for the PreparedStatement using the provided ID
+				data.setInt(1, id);
+
+				// Execute the query to delete the data from the database
+				data.executeUpdate();
+
+			}
+		} catch (SQLException e) {
+			// If an SQLException occurs, throw a DAOException with a custom error message
+			throw new DAOException(UserDaoErrors.INVALID_DELETE);
+		}
+		// Return true if the delete was successful
+		return true;
+	}
+	
 	/**
 	 * Retrieves the user ID based on the email.
 	 *
@@ -133,6 +214,28 @@ public class UserDao {
 	public static int getUserIdByEmail(String email) throws DAOException {
 		int id = 0;
 		String queryDeleteEvents = "SELECT id FROM userdetails WHERE email = ? ";
+		try (Connection con = ConnectionUtil.getConnection()) {
+			try (PreparedStatement pst = con.prepareStatement(queryDeleteEvents)) {
+
+				pst.setString(1, email);
+				try (ResultSet rs = pst.executeQuery()) {
+
+					if (rs.next()) {
+						id = rs.getInt("id");
+
+					}
+
+				}
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+		return id;
+	}
+	
+	public static int getTenantIdByEmail(String email) throws DAOException {
+		int id = 0;
+		String queryDeleteEvents = "SELECT id FROM Tenantdetails WHERE email = ? ";
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(queryDeleteEvents)) {
 
@@ -196,4 +299,272 @@ public class UserDao {
 		}
 
 	}
+	
+	public static List<User> readTenant() throws DAOException, SQLException {
+
+		List<User> user = new ArrayList<>();
+		// SQL query to select all rows from the "userdetails" table
+		final String query = "SELECT * FROM Tenantdetails";
+
+		try (Connection connection = ConnectionUtil.getConnection()) {
+
+			try (Statement pst = connection.createStatement()) {
+
+				try (ResultSet rs = pst.executeQuery(query)) {
+					// Loop through the result set and populate the User objects
+					while (rs.next()) {
+
+						User userData = new User();
+						userData.setId(rs.getInt("id"));
+						userData.setFirstName(rs.getString("name"));
+						userData.setEmail(rs.getString("email"));
+						userData.setAddress(rs.getString("address"));
+						userData.setpPhoneNum(rs.getString("phonenumber"));
+						userData.setPassword(rs.getString("password"));
+						userData.setBikephotourl(rs.getString("bikephotourl"));
+
+						user.add(userData);
+
+					}
+					// Return the list of users
+					return user;
+				}
+			} catch (SQLException e) {
+				// If an SQLException occurs, throw a DAOException with a custom error message
+				throw new DAOException(e.getMessage());
+			}
+		}
+
+	}
+	
+	
+	public static User login(String email, String password) throws DAOException {
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			// SQL query to delete the user from the 'user' table.
+			String query = "SELECT * FROM userdetails WHERE email = ? AND password = ?";
+
+			// Prepares the SQL query with the user_id.
+			try (PreparedStatement psmt = con.prepareStatement(query)) {
+
+				// Sets the user_id in the PreparedStatement.
+				psmt.setString(1, email);
+				psmt.setString(2, password);
+
+				// Executes the delete query.
+				try (ResultSet rs = psmt.executeQuery()) {
+
+					if (rs.next()) {
+						User userData = new User();
+
+						userData.setFirstName(rs.getString("name"));
+						userData.setEmail(rs.getString("email"));
+						userData.setAddress(rs.getString("address"));
+						userData.setpPhoneNum(rs.getString("phonenumber"));
+						userData.setPassword(rs.getString("password"));
+						userData.setMapurl(rs.getString("mapurl"));
+						userData.setPlacephotourl(rs.getString("placephotourl"));
+						return userData;
+					}
+				}
+
+			}
+			return null;
+
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+	}
+	
+	public static User tenantlogin(String email, String password) throws DAOException {
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			// SQL query to delete the user from the 'user' table.
+			String query = "SELECT * FROM Tenantdetails WHERE email = ? AND password = ?";
+
+			// Prepares the SQL query with the user_id.
+			try (PreparedStatement psmt = con.prepareStatement(query)) {
+
+				// Sets the user_id in the PreparedStatement.
+				psmt.setString(1, email);
+				psmt.setString(2, password);
+
+				// Executes the delete query.
+				try (ResultSet rs = psmt.executeQuery()) {
+
+					if (rs.next()) {
+						User userData = new User();
+
+						userData.setFirstName(rs.getString("name"));
+						userData.setEmail(rs.getString("email"));
+						userData.setAddress(rs.getString("address"));
+						userData.setpPhoneNum(rs.getString("phonenumber"));
+						userData.setPassword(rs.getString("password"));
+						userData.setBikephotourl(rs.getString("bikephotourl"));
+						return userData;
+					}
+				}
+
+			}
+			return null;
+
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+	}
+	
+	public List<String> getAllUserEmails() throws DAOException {
+
+		// ArrayList to store the user email addresses.
+		List<String> userNames = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+			// SQL query to retrieve all email addresses from the 'user' table.
+			String query = "SELECT email FROM userdetails";
+
+			// Creates a Statement object to execute the query.
+			try (Statement smt = con.createStatement()) {
+
+				// Executes the query and retrieves the results in a ResultSet.
+				try (ResultSet resultSet = smt.executeQuery(query)) {
+
+					// Iterates through the ResultSet and adds each email to the ArrayList.
+					while (resultSet.next()) {
+						userNames.add(resultSet.getString(1));
+					}
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+
+		return userNames;
+	}
+	
+	public List<String> getAllTenantEmails() throws DAOException {
+
+		// ArrayList to store the user email addresses.
+		List<String> userNames = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+			// SQL query to retrieve all email addresses from the 'user' table.
+			String query = "SELECT email FROM Tenantdetails";
+
+			// Creates a Statement object to execute the query.
+			try (Statement smt = con.createStatement()) {
+
+				// Executes the query and retrieves the results in a ResultSet.
+				try (ResultSet resultSet = smt.executeQuery(query)) {
+
+					// Iterates through the ResultSet and adds each email to the ArrayList.
+					while (resultSet.next()) {
+						userNames.add(resultSet.getString(1));
+					}
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+
+		return userNames;
+	}
+	
+	public boolean isUserExist(User user) throws DAOException {
+		// Retrieves all user email addresses from the 'user' table.
+		List<String> userEmails = getAllUserEmails();
+
+		// Checks if the provided user's email is in the list of user emails.
+		return userEmails.contains(user.getEmail());
+	}
+	
+	public boolean isTenantExist(User user) throws DAOException {
+		List<String> tenantEmails = getAllTenantEmails();
+		
+		return tenantEmails.contains(user.getEmail());
+	}
+	
+	public User getUserByEmail(String email) throws DAOException {
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			// SQL query to delete the user from the 'user' table.
+			String query = "SELECT * FROM userdetails WHERE email = ?";
+
+			User userData;
+			// Prepares the SQL query with the user_id.
+			try (PreparedStatement psmt = con.prepareStatement(query)) {
+
+				
+				psmt.setString(1, email);
+				
+
+				// Executes the delete query.
+				try (ResultSet rs = psmt.executeQuery()) {
+
+					if (rs.next()) {
+						userData = new User();
+						userData.setFirstName(rs.getString("name"));
+						userData.setEmail(rs.getString("email"));
+						userData.setAddress(rs.getString("address"));
+						userData.setpPhoneNum(rs.getString("phonenumber"));
+						userData.setPassword(rs.getString("password"));
+						userData.setMapurl(rs.getString("mapurl"));
+						userData.setPlacephotourl(rs.getString("placephotourl"));
+
+						return userData; 
+			 		}
+				}
+
+			}
+			return null;
+
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+	}
+	
+	
+	public User getTenantByEmail(String email) throws DAOException {
+
+		try (Connection con = ConnectionUtil.getConnection()) {
+
+			// SQL query to delete the user from the 'user' table.
+			String query = "SELECT * FROM Tenantdetails WHERE email = ?";
+
+			User userData;
+			// Prepares the SQL query with the user_id.
+			try (PreparedStatement psmt = con.prepareStatement(query)) {
+
+				
+				psmt.setString(1, email);
+				
+
+				// Executes the delete query.
+				try (ResultSet rs = psmt.executeQuery()) {
+
+					if (rs.next()) {
+						userData = new User();
+						userData.setFirstName(rs.getString("name"));
+						userData.setEmail(rs.getString("email"));
+						userData.setAddress(rs.getString("address"));
+						userData.setpPhoneNum(rs.getString("phonenumber"));
+						userData.setPassword(rs.getString("password"));
+						userData.setPlacephotourl(rs.getString("bikephotourl"));
+
+						return userData; 
+					}
+				}
+
+			}
+			return null;
+
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+	}
+	
 }

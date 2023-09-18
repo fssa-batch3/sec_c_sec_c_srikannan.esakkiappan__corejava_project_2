@@ -21,7 +21,7 @@ public class ConnectionUtil {
 		Connection con = null;
 
 		String url;
-		String userName;
+		String userName; 
 		String passWord;
  
 		url = System.getenv("DATABASE_HOST");

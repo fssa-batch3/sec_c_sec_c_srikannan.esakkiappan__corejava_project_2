@@ -13,7 +13,7 @@ import com.fssa.parkinplace.model.User;
 public class UserValidator {
 
     /**
-     * Validates a User object.
+     * Validates a User object. 
      *
      * @param user The User object to be validated.
      * @return True if the validation passes.
@@ -30,10 +30,24 @@ public class UserValidator {
         validatePassword(user.getPassword());
         validateMapUrl(user.getMapurl());
         validatePlacePhotoUrl(user.getPlacephotourl());
-
-        return true;
+        
+        return true; 
     }
 
+    public static boolean validateTenant(User user) {
+        if (user == null) {
+            throw new UserException(UserValidatorErrors.INVALID_OBJECT_NULL);
+        }
+        validateName(user.getFirstName());
+        validateEmail(user.getEmail());
+        validateAddress(user.getAddress());
+        validatePhoneNumber(user.getPhoneNum());
+        validatePassword(user.getPassword());
+        validateBikePhotoUrl(user.getBikephotourl());
+        
+        return true; 
+    }
+    
     /**
      * Validates a user's name.
      *
@@ -63,7 +77,7 @@ public class UserValidator {
      * @param email The email address to be validated.
      * @return True if the validation passes.
      * @throws UserException if there is an issue with the validation.
-     */
+     */ 
     public static boolean validateEmail(String email) throws UserException {
 
         if (email == null) {
@@ -199,6 +213,27 @@ public class UserValidator {
         String urlregex = "^(https?://)?[^\\s/$.?#].[^\\s]*\\.(?:png|jpg|jpeg|gif|svg)$";
         Pattern pattern = Pattern.compile(urlregex);
         Matcher matcher = pattern.matcher(placephotourl);
+        Boolean isMatch = matcher.matches();
+
+        // Check if the PlacePhotoUrl matches the regular expression pattern
+        if (Boolean.FALSE.equals(isMatch)) {
+            throw new UserException(UserValidatorErrors.INVALID_PLACEPHOTOURL);
+        }
+        return true;
+    }
+    
+    public static boolean validateBikePhotoUrl(String bikephotourl) throws UserException {
+        // Check if the PlacePhotoUrl is null, empty, or too short (less than 2
+        // characters)
+        if (bikephotourl == null || "".equals(bikephotourl.trim()) || bikephotourl.length() < 2) {
+            throw new UserException(UserValidatorErrors.INVALID_PLACEPHOTOURL);
+        }
+
+        // Regular expression to validate the PlacePhotoUrl format (should be a valid
+        // imgur URL)
+        String urlregex = "^(https?://)?[^\\s/$.?#].[^\\s]*\\.(?:png|jpg|jpeg|gif|svg)$";
+        Pattern pattern = Pattern.compile(urlregex);
+        Matcher matcher = pattern.matcher(bikephotourl);
         Boolean isMatch = matcher.matches();
 
         // Check if the PlacePhotoUrl matches the regular expression pattern

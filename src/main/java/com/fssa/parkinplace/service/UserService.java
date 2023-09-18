@@ -6,6 +6,7 @@ import java.util.List;
 import com.fssa.logger.Logger;
 import com.fssa.parkinplace.dao.UserDao;
 import com.fssa.parkinplace.exception.DAOException;
+import com.fssa.parkinplace.exception.UserException;
 import com.fssa.parkinplace.model.User;
 import com.fssa.parkinplace.validation.UserValidator;
 
@@ -14,6 +15,18 @@ import com.fssa.parkinplace.validation.UserValidator;
  */
 public class UserService {
 	
+	private UserDao userDao;
+	private UserValidator userValidator;
+	
+	public UserService(UserDao userDao, UserValidator userValidator) {
+		this.userDao = userDao;
+		this.userValidator = userValidator;
+	}
+	 
+	public UserService() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/** 
 	 * Adds a new User to the database.
 	 *
@@ -32,8 +45,16 @@ public class UserService {
 		// Return true if the operation was successful 
 		return true;
 	}  
-	 
-	/**
+	
+	public static boolean addTenant(User user) throws DAOException {
+		if(UserValidator.validateTenant(user)) {
+			UserDao.addTenant(user);
+			Logger.info("Tenant Added Successfully");
+		}
+		return true;
+	}
+	  
+	/** 
 	 * Updates an existing User in the database.
 	 *
 	 * @param user The User object to be updated.
@@ -51,6 +72,17 @@ public class UserService {
 		return true; 
 	}
 	
+	public static boolean updateTenant(User user) throws DAOException {  
+		// Validate the User object using the UserValidator class
+		if (UserValidator.validateTenant(user)) {
+			// If the object is valid, call the updateUser method from the DAO to
+			// update the data in the database
+			UserDao.updateTenant(user);
+		}
+		// Return true if the operation was successful
+		return true; 
+	} 
+	
 	/**
 	 * Deletes a User from the database by its ID.
 	 *
@@ -60,6 +92,12 @@ public class UserService {
 	 */
 	public static boolean deleteUser(int id) throws DAOException {
 		UserDao.deleteUser(id);
+		// Return true if the operation was successful
+		return true;
+	}
+	
+	public static boolean deleteTenant(int id) throws DAOException {
+		UserDao.deleteTenant(id);
 		// Return true if the operation was successful
 		return true;
 	}
@@ -74,4 +112,40 @@ public class UserService {
 	public static List<User> readUser() throws DAOException, SQLException {
 		return UserDao.readUser();
 	}
+	
+	public static List<User> readTenant() throws DAOException, SQLException {
+		return UserDao.readTenant();
+	}
+	
+	public User login(String email, String password) throws DAOException, UserException {
+
+		User user = null;
+		if (UserValidator.validateEmail(email)) {
+			user = UserDao.login(email, password);
+		}
+		 
+		return user;
+	}
+	
+	
+	public User Tenantlogin(String email, String password) throws DAOException, UserException {
+
+		User user = null;
+		if (UserValidator.validateEmail(email)) {
+			user = UserDao.tenantlogin(email, password);
+		}
+		
+		return user; 
+	}
+	
+	// Method to get all user email addresses from the DAO
+		public User getUserByEmail(String email) throws DAOException {
+
+			return userDao.getUserByEmail(email);
+		}
+		
+		public User getTenantByEmail(String email) throws DAOException {
+
+			return userDao.getTenantByEmail(email);
+		}
 }

@@ -28,7 +28,7 @@ public class UserDao {
 	 * @throws DAOException if there is an issue with the database operation.
 	 */
 	public static boolean addUser(User user) throws DAOException {
-		final String query = "INSERT INTO userdetails (name, email, address, phonenumber, password, mapurl, placephotourl) VALUES(?,?,?,?,?,?,?)";
+		final String query = "INSERT INTO userdetails (name, email, address, phonenumber, password, mapurl, placephotourl,lattitude,longitude) VALUES(?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -40,9 +40,11 @@ public class UserDao {
 				data.setString(5, user.getPassword()); 
 				data.setString(6, user.getMapurl());
 				data.setString(7, user.getPlacephotourl());
+				data.setDouble(8, user.getLatitude());
+				data.setDouble(9, user.getLongitude());
 
 				int row = data.executeUpdate();
-
+ 
 				// Print a success message and return true if the insertion was successful
 				return (row > 0);
 			}
@@ -89,7 +91,7 @@ public class UserDao {
 
 		int id = getUserIdByEmail(user.getEmail());
 
-		final String query = "UPDATE userdetails SET name=?, email=?, address=?, phonenumber=?, password=?, mapurl=?, placephotourl=? WHERE id=?";
+		final String query = "UPDATE userdetails SET name=?, email=?, address=?, phonenumber=?, password=?, mapurl=?, placephotourl=?,lattitude=?,longitude=? WHERE id=?";
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -103,7 +105,9 @@ public class UserDao {
 				data.setString(5, user.getPassword());
 				data.setString(6, user.getMapurl());
 				data.setString(7, user.getPlacephotourl());
-				data.setInt(8, id);
+				data.setDouble(8, user.getLatitude());
+				data.setDouble(9, user.getLongitude());
+				data.setInt(10, id);
 
 				// Execute the query to update the data in the database
 				int row = data.executeUpdate();
@@ -121,7 +125,7 @@ public class UserDao {
 	
 	public static boolean updateTenant(User user) throws DAOException {
 
-		int id = getUserIdByEmail(user.getEmail());
+		int id = getTenantIdByEmail(user.getEmail());
 
 		final String query = "UPDATE Tenantdetails SET name=?, email=?, address=?, phonenumber=?, password=?, bikephotourl=? WHERE id=?";
 
@@ -285,6 +289,8 @@ public class UserDao {
 						userData.setPassword(rs.getString("password"));
 						userData.setMapurl(rs.getString("mapurl"));
 						userData.setPlacephotourl(rs.getString("placephotourl"));
+						userData.setLatitude(rs.getDouble("lattitude"));
+						userData.setLongitude(rs.getDouble("longitude"));
 
 						user.add(userData);
 
@@ -365,6 +371,8 @@ public class UserDao {
 						userData.setPassword(rs.getString("password"));
 						userData.setMapurl(rs.getString("mapurl"));
 						userData.setPlacephotourl(rs.getString("placephotourl"));
+						userData.setLatitude(rs.getDouble("lattitude"));
+						userData.setLongitude(rs.getDouble("longitude"));
 						return userData;
 					}
 				}
@@ -487,7 +495,7 @@ public class UserDao {
 		return tenantEmails.contains(user.getEmail());
 	}
 	
-	public User getUserByEmail(String email) throws DAOException {
+	public static User getUserByEmail(String email) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
@@ -514,6 +522,8 @@ public class UserDao {
 						userData.setPassword(rs.getString("password"));
 						userData.setMapurl(rs.getString("mapurl"));
 						userData.setPlacephotourl(rs.getString("placephotourl"));
+						userData.setLatitude(rs.getDouble("lattitude"));
+						userData.setLongitude(rs.getDouble("longitude"));
 
 						return userData; 
 			 		}
@@ -528,7 +538,7 @@ public class UserDao {
 	}
 	
 	
-	public User getTenantByEmail(String email) throws DAOException {
+	public static User getTenantByEmail(String email) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 

@@ -26,4 +26,7 @@ public class UserValidatorErrors {
 	
 	public static final String INVALID_PLACEPHOTOURL = "placephotourl is: Invalid";
 	
+	public static final String INVALID_LATITUDE = "Lattitude is: Invalid";
+	
+	public static final String INVALID_LONGITUDE = "Longitude is: Invalid";
 }

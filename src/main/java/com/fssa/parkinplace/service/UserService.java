@@ -13,9 +13,9 @@ import com.fssa.parkinplace.validation.UserValidator;
 /**
  * This class provides services related to the User entity.
  */
-public class UserService {
+public class UserService { 
 	
-	private UserDao userDao;
+	private static UserDao userDao;
 	private UserValidator userValidator;
 	
 	public UserService(UserDao userDao, UserValidator userValidator) {
@@ -42,6 +42,7 @@ public class UserService {
 			UserDao.addUser(user);
 			Logger.info("User Added Successfully");
 		}
+		
 		// Return true if the operation was successful 
 		return true;
 	}  
@@ -112,7 +113,7 @@ public class UserService {
 	public static List<User> readUser() throws DAOException, SQLException {
 		return UserDao.readUser();
 	}
-	
+	 
 	public static List<User> readTenant() throws DAOException, SQLException {
 		return UserDao.readTenant();
 	}
@@ -139,13 +140,13 @@ public class UserService {
 	}
 	
 	// Method to get all user email addresses from the DAO
-		public User getUserByEmail(String email) throws DAOException {
+		public static User getUserByEmail(String email) throws DAOException {
 
-			return userDao.getUserByEmail(email);
+			return UserDao.getUserByEmail(email);
 		}
 		
-		public User getTenantByEmail(String email) throws DAOException {
+		public static User getTenantByEmail(String email) throws DAOException {
 
-			return userDao.getTenantByEmail(email);
+			return UserDao.getTenantByEmail(email);
 		}
 }

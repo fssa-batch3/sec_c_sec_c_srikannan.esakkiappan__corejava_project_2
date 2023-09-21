@@ -12,7 +12,7 @@ import com.fssa.parkinplace.model.User;
  */
 public class UserValidator {
 
-    /**
+    /** 
      * Validates a User object. 
      *
      * @param user The User object to be validated.
@@ -30,6 +30,8 @@ public class UserValidator {
         validatePassword(user.getPassword());
         validateMapUrl(user.getMapurl());
         validatePlacePhotoUrl(user.getPlacephotourl());
+        validateLatitude(user.getLatitude());
+        validateLongitude(user.getLongitude());
         
         return true; 
     }
@@ -58,7 +60,7 @@ public class UserValidator {
     public static boolean validateName(String name) throws UserException {
         if (name == null || "".equals(name.trim()) || name.length() < 2) {
             throw new UserException(UserValidatorErrors.INVALID_NAME);
-        }
+        } 
 
         String nameregex = "^[A-Za-z]{2,30}$";
         Pattern pattern = Pattern.compile(nameregex);
@@ -219,6 +221,20 @@ public class UserValidator {
         if (Boolean.FALSE.equals(isMatch)) {
             throw new UserException(UserValidatorErrors.INVALID_PLACEPHOTOURL);
         }
+        return true;
+    }
+    
+    public static boolean validateLatitude(double latitude) {
+    	if(latitude < -90 && latitude > 90) {
+    		throw new UserException(UserValidatorErrors.INVALID_LATITUDE);
+    	}
+        return true;
+    }
+    
+    public static boolean validateLongitude(double longitude) {
+    	if(longitude < -180 && longitude > 180) {
+    		throw new UserException(UserValidatorErrors.INVALID_LONGITUDE);
+    	}
         return true;
     }
     

@@ -24,4 +24,4 @@ public class DAOException extends Exception {
 		// Call the constructor of the base class (Exception) with both the custom error message and the Throwable (exception)
 		super(msg, te);
 	}
-}
+} 

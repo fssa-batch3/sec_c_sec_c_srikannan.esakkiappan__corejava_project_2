@@ -20,7 +20,7 @@ class TestUserService {
      * @return A User object with sample details.
      */
     public User userDetails() {
-        User p1 = new User(null, null, null, null, null, null); 
+        User p1 = new User(null, null, null, null, null, null,null, 0,0); 
         p1.setId(1);  
         p1.setFirstName("Sri");
         p1.setpPhoneNum("8617728611");
@@ -29,8 +29,10 @@ class TestUserService {
         p1.setPassword("Srik@2003");
         p1.setMapurl("https://maps.app.goo.gl/Mr8fd3QVjYEJHqGE91");
         p1.setPlacephotourl("https://iili.io/HUN8VHX.jpg");
+        p1.setLatitude(40.7128);
+        p1.setLongitude(-74.0060);
 
-        return p1; 
+        return p1;  
     } 
 
     /**
@@ -39,15 +41,17 @@ class TestUserService {
      * @return A User object with updated sample details.
      */
     public User updateUserDetails() {
-        User p1 = new User(null, null, null, null, null, null);
+        User p1 = new User(null, null, null, null, null, null,null,0,0);
         p1.setId(2);
         p1.setFirstName("Sakthi");
         p1.setpPhoneNum("9655221849");
-        p1.setEmail("sakthi2002@gmail.com");
+        p1.setEmail("sakthi2002@gmail.com"); 
         p1.setAddress("89,2nd Main Rd,KothariNagar,Ramapuram,Chennai");
         p1.setPassword("Sakti@2003");
         p1.setMapurl("https://maps.app.goo.gl/xNbnms9FCoKySDEs5");
         p1.setPlacephotourl("https://iili.io/Hv6nOJV.jpg");
+        p1.setLatitude(40.7128);
+        p1.setLongitude(-74.0060);
 
         return p1;
     }
@@ -94,7 +98,7 @@ class TestUserService {
      *
      * @throws DAOException If a DAOException occurs during testing.
      */
-    @Test
+    @Test 
     void testValidUpdateUser() throws DAOException {
         TestUserService userservice = new TestUserService();
         Assertions.assertTrue(UserService.updateUser(userservice.updateUserDetails()));
@@ -143,6 +147,12 @@ class TestUserService {
     void testValidReadTenant() throws DAOException, SQLException {
         List<User> list = UserService.readTenant();
         Assertions.assertNotNull(list);
+    }
+    
+    @Test
+    void testValidGetUserByEmail() throws DAOException {
+    	TestUserService userservice = new TestUserService();
+        Assertions.assertNotNull(UserService.getUserByEmail(userDetails().getEmail()));
     }
     
 }

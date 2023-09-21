@@ -19,7 +19,7 @@ public class ConnectionUtil {
 	 */
 	public static Connection getConnection() {
 		Connection con = null;
-
+ 
 		String url;
 		String userName; 
 		String passWord;

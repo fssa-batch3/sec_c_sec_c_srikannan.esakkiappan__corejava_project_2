@@ -1,30 +1,59 @@
 package com.fssa.parkinplace.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class BookingPlace {
-    private int id;
+	
+    private int bookingId;
     private String leaserEmail;
     private String tenantEmail;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalDateTime startingPeriod;
+    private LocalDateTime endingPeriod;
     private double amount;
     private String status;
-    private String bookingDuration;
+    
+    
+    public BookingPlace(int bookingId, String leaserEmail, String tenantEmail, LocalDateTime startingPeriod,
+			LocalDateTime endingPeriod, double amount, String status) {
+		super();
+		this.bookingId = bookingId;
+		this.leaserEmail = leaserEmail;
+		this.tenantEmail = tenantEmail;
+		this.startingPeriod = startingPeriod;
+		this.endingPeriod = endingPeriod; 
+		this.amount = amount;
+		this.status = status;
+	}
 
-    // Getter and Setter methods for 'id' attribute
-    public int getId() {
-        return id;
+    // Constructors (default and parameterized, if needed)
+
+    // Getter and Setter methods for each field
+
+    public BookingPlace() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public BookingPlace(String leaserEmail, String tenantEmail, LocalDateTime startingPeriod,
+			LocalDateTime endingPeriod, double amount, String status) {
+		this.leaserEmail= leaserEmail;
+		this.tenantEmail = tenantEmail;
+		this.startingPeriod = startingPeriod;
+		this.endingPeriod = endingPeriod;
+		this.amount = amount;
+		this.status = status;
+	}
+
+
+
+	public int getBookingId() {
+        return bookingId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
     }
 
-    // Getter and Setter methods for 'leaserEmail' attribute
     public String getLeaserEmail() {
         return leaserEmail;
     }
@@ -33,7 +62,6 @@ public class BookingPlace {
         this.leaserEmail = leaserEmail;
     }
 
-    // Getter and Setter methods for 'tenantEmail' attribute
     public String getTenantEmail() {
         return tenantEmail;
     }
@@ -42,43 +70,22 @@ public class BookingPlace {
         this.tenantEmail = tenantEmail;
     }
 
-    // Getter and Setter methods for 'startDate' attribute
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDateTime getStartingPeriod() {
+        return startingPeriod;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStartingPeriod(LocalDateTime startingPeriod) {
+        this.startingPeriod = startingPeriod;
     }
 
-    // Getter and Setter methods for 'endDate' attribute
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDateTime getEndingPeriod() {
+        return endingPeriod;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setEndingPeriod(LocalDateTime endingPeriod) {
+        this.endingPeriod = endingPeriod;
     }
 
-    // Getter and Setter methods for 'startTime' attribute
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    // Getter and Setter methods for 'endTime' attribute
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    // Getter and Setter methods for 'amount' attribute
     public double getAmount() {
         return amount;
     }
@@ -87,7 +94,6 @@ public class BookingPlace {
         this.amount = amount;
     }
 
-    // Getter and Setter methods for 'status' attribute
     public String getStatus() {
         return status;
     }
@@ -96,12 +102,4 @@ public class BookingPlace {
         this.status = status;
     }
 
-    // Getter and Setter methods for 'bookingDuration' attribute
-    public String getBookingDuration() {
-        return bookingDuration;
-    }
-
-    public void setBookingDuration(String bookingDuration) {
-        this.bookingDuration = bookingDuration;
-    }
 }

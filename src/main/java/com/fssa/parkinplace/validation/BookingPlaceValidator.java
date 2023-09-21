@@ -1,84 +1,66 @@
 package com.fssa.parkinplace.validation;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.fssa.parkinplace.errors.BookingPlaceValidatorError;
+import com.fssa.parkinplace.errors.UserValidatorErrors;
 import com.fssa.parkinplace.exception.BookingException;
+import com.fssa.parkinplace.exception.UserException;
 import com.fssa.parkinplace.model.BookingPlace;
 
 public class BookingPlaceValidator {
 
     public static boolean validate(BookingPlace bookingPlace) {
         if (bookingPlace == null) {
-            throw new IllegalArgumentException("BookingPlace cannot be null.");
+            throw new BookingException(BookingPlaceValidatorError.INVALID_OBJECT_NULL);
         }
+        
         validateEmail(bookingPlace.getLeaserEmail());
         validateEmail(bookingPlace.getTenantEmail());
-        validateDates(bookingPlace.getStartDate(), bookingPlace.getEndDate());
-        validateTimes(bookingPlace.getStartTime(), bookingPlace.getEndTime());
+        validateDates(bookingPlace.getStartingPeriod(), bookingPlace.getEndingPeriod());
         validateAmount(bookingPlace.getAmount());
         validateStatus(bookingPlace.getStatus());
-        validateBookingDuration(bookingPlace.getBookingDuration());
-        
-        return true;
+		return true;
     }
-
+ 
     public static boolean validateEmail(String email) throws BookingException {
-        if (email == null || email.isEmpty()) {
-            throw new BookingException("Email cannot be null or empty.");
+        if (email == null) {
+            throw new BookingException(BookingPlaceValidatorError.INVALID_EMAIL);
         }
-
+ 
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-
-        if (!matcher.matches()) {
-            throw new BookingException("Invalid email format.");
+        Boolean isMatch = matcher.matches();
+        if (Boolean.TRUE.equals(isMatch)) {
+            return true;
+        } else {
+            throw new UserException(BookingPlaceValidatorError.INVALID_EMAIL);
         }
-        
-        return true;
     }
 
-    public static boolean validateDates(LocalDate startDate, LocalDate endDate) throws BookingException {
+    public static boolean validateDates(LocalDateTime startDate, LocalDateTime endDate) throws BookingException {
         if (startDate == null || endDate == null || startDate.isAfter(endDate)) {
-            throw new BookingException("Invalid date range.");
+            throw new BookingException(BookingPlaceValidatorError.INVALID_DATES);
         }
-        
-        return true;
-    }
-
-    public static boolean validateTimes(LocalTime startTime, LocalTime endTime) throws BookingException {
-        if (startTime == null || endTime == null || startTime.isAfter(endTime)) {
-            throw new BookingException("Invalid time range.");
-        }
-        
-        return true;
+		return true;
     }
 
     public static boolean validateAmount(double amount) throws BookingException {
         if (amount < 0) {
-            throw new BookingException("Amount cannot be negative.");
+            throw new BookingException(BookingPlaceValidatorError.INVALID_AMOUNT);
         }
-        
-        return true;
+		return true;
     }
 
     public static boolean validateStatus(String status) throws BookingException {
         if (status == null || status.isEmpty()) {
-            throw new BookingException("Status cannot be null or empty.");
+            throw new BookingException(BookingPlaceValidatorError.INVALID_STATUS);
         }
-        
-        return true;
-    }
-
-    public static boolean validateBookingDuration(String bookingDuration) throws BookingException {
-        if (bookingDuration == null || bookingDuration.isEmpty()) {
-            throw new BookingException("Booking duration cannot be null or empty.");
-        }
-        
-        return true;
+		return true;
     }
 }
+
 

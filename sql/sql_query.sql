@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS userdetails (
     phonenumber VARCHAR(15) NOT NULL,
     password VARCHAR(15) NOT NULL,
     mapurl VARCHAR(150)  NOT NULL UNIQUE,
-    placephotourl VARCHAR(150) NOT NULL
+    placephotourl VARCHAR(150) NOT NULL,
+    lattitude DOUBLE NOT NULL,
+    longitude DOUBLE NOT NULL
 ); 
 
 SELECT * FROM userdetails;
@@ -25,6 +27,18 @@ CREATE TABLE IF NOT EXISTS Tenantdetails (
 ); 
 
 SELECT * FROM Tenantdetails;
+
+CREATE TABLE ParkingPlaceBooking (
+    bookingId INT AUTO_INCREMENT PRIMARY KEY,
+    leaserEmail VARCHAR(255) NOT NULL,
+    tenantEmail VARCHAR(255) NOT NULL UNIQUE,
+    startingPeriod DATETIME NOT NULL,
+    endingPeriod DATETIME NOT NULL,
+    amount DOUBLE NOT NULL,
+    status VARCHAR(255) NOT NULL
+);
+
+SELECT * FROM ParkingPlaceBooking;
 
 
 

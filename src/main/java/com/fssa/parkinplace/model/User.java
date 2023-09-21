@@ -1,19 +1,29 @@
 package com.fssa.parkinplace.model;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Represents a User in the system.
  */
 public class User {
     private int userid;
+    @NotNull
     private String name;
+    @NotNull
     private String email;
+    @NotNull
     private String address;
+    @NotNull
     private String phonenum;
+    @NotNull
     private String password;
+    @NotNull
     private String mapurl;
-    private String placephotourl;
-    private String lattitude;
-    private String longitude;
+    @NotNull
+    private String placephotourl; 
+    private double latitude;
+    private double longitude;
+    @NotNull
     private String bikephotourl;
 
     /** 
@@ -27,16 +37,18 @@ public class User {
      * @param mapurl        The URL to the user's map.
      * @param placephotourl The URL to the user's place photo.
      */
-    public User(String name, String address, String email, String phonenum, String password, String mapurl, String placephotourl) {
+    public User(String name, String address, String email, String phonenum, String password, String mapurl, String placephotourl, double latitude, double longitude) {
         super();
 
         this.name = name;
         this.email = email;
-        this.address = address;
+        this.address = address; 
         this.phonenum = phonenum;
         this.password = password;
         this.mapurl = mapurl;
         this.placephotourl = placephotourl;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
     
     public User(String name, String address, String email, String phonenum, String password,String bikephotourl) {
@@ -198,6 +210,26 @@ public class User {
      */
     public void setPlacephotourl(String placephotourl) {
         this.placephotourl = placephotourl;
+    }
+    
+    // Getter method for latitude
+    public double getLatitude() {
+        return latitude;
+    }
+
+    // Setter method for latitude
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    // Getter method for longitude
+    public double getLongitude() {
+        return longitude;
+    }
+
+    // Setter method for longitude
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
     
     

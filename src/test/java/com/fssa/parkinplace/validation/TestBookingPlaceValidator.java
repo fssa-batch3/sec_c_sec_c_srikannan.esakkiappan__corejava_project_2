@@ -1,139 +1,129 @@
 package com.fssa.parkinplace.validation;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.parkinplace.exception.BookingException;
 import com.fssa.parkinplace.model.BookingPlace;
+import com.fssa.parkinplace.exception.BookingException;
+import com.fssa.parkinplace.exception.UserException;
+import com.fssa.parkinplace.errors.BookingPlaceValidatorError;
+import com.fssa.parkinplace.errors.UserValidatorErrors;
 
 public class TestBookingPlaceValidator {
-	
-	private BookingPlace createValidBookingPlace() {
-        BookingPlace bookingPlace = new BookingPlace();
-        bookingPlace.setLeaserEmail("leaser@example.com");
-        bookingPlace.setTenantEmail("tenant@example.com");
-        bookingPlace.setStartDate(LocalDate.now());
-        bookingPlace.setEndDate(LocalDate.now().plusDays(7));
-        bookingPlace.setStartTime(LocalTime.of(10, 0));
-        bookingPlace.setEndTime(LocalTime.of(12, 0));
+
+    public static BookingPlace createValidBookingPlace() {
+        BookingPlace bookingPlace = new BookingPlace( null, null, null, null, 0, null);
+        bookingPlace.setLeaserEmail("srik.2003@gmail.com");
+        bookingPlace.setTenantEmail("sri@gmail.com");
+        bookingPlace.setStartingPeriod(LocalDateTime.now());
+        bookingPlace.setEndingPeriod(LocalDateTime.now().plusDays(7));
         bookingPlace.setAmount(100.0);
-        bookingPlace.setStatus("Active");
-        bookingPlace.setBookingDuration("1 week");
+        bookingPlace.setStatus("Accepted");
         return bookingPlace;
     }
 
+    public static BookingPlace createInvalidBookingPlace() {
+        BookingPlace bookingPlace = new BookingPlace(null, null, null, null, 0, null);
+        return bookingPlace; 
+    }
+ 
     @Test
     void testValidBookingPlace() throws BookingException {
         BookingPlace validBookingPlace = createValidBookingPlace();
-        boolean result = false;
-        try {
-            result = BookingPlaceValidator.validate(validBookingPlace);
-        } catch (BookingException e) {
-            result = false; 
-        }
-        Assertions.assertTrue(result);
+        Assertions.assertTrue(BookingPlaceValidator.validate(validBookingPlace));
     }
-
+ 
     @Test
     void testInvalidBookingPlaceNull() {
-        try {
-            BookingPlaceValidator.validate(null);
-            Assertions.fail("Expected IllegalArgumentException was not thrown.");
-        } catch (IllegalArgumentException e) {
-            Assertions.assertEquals("BookingPlace cannot be null.", e.getMessage());
+    	try {
+    		BookingPlaceValidator.validate(null);
         } catch (BookingException e) {
-            Assertions.fail("Unexpected BookingException was thrown.");
+            Assertions.assertEquals(BookingPlaceValidatorError.INVALID_OBJECT_NULL, e.getMessage());
         }
+    }
+    
+    @Test
+    void testValidLeaserEmail() throws BookingException {
+        BookingPlace validBookingPlace = createValidBookingPlace();
+        Assertions.assertTrue(BookingPlaceValidator.validateEmail(validBookingPlace.getLeaserEmail()));
     }
 
     @Test
     void testInvalidLeaserEmail() {
-        BookingPlace invalidBookingPlace = createValidBookingPlace();
-        invalidBookingPlace.setLeaserEmail(null);
+        BookingPlace invalidBookingPlace = createInvalidBookingPlace();
         try {
-            BookingPlaceValidator.validate(invalidBookingPlace);
-            Assertions.fail("Expected BookingException was not thrown.");
+            BookingPlaceValidator.validateEmail(invalidBookingPlace.getLeaserEmail());
         } catch (BookingException e) {
-            Assertions.assertEquals("Email cannot be null or empty.", e.getMessage());
+            Assertions.assertEquals(BookingPlaceValidatorError.INVALID_EMAIL, e.getMessage());
         }
+    }
+    
+    @Test
+    void testValidTenantEmail() throws BookingException {
+        BookingPlace validBookingPlace = createValidBookingPlace();
+        Assertions.assertTrue(BookingPlaceValidator.validateEmail(validBookingPlace.getTenantEmail()));
     }
 
     @Test
     void testInvalidTenantEmail() {
-        BookingPlace invalidBookingPlace = createValidBookingPlace();
-        invalidBookingPlace.setTenantEmail(null);
+        BookingPlace invalidBookingPlace = createInvalidBookingPlace();
         try {
-            BookingPlaceValidator.validate(invalidBookingPlace);
-            Assertions.fail("Expected BookingException was not thrown.");
+            BookingPlaceValidator.validateEmail(invalidBookingPlace.getTenantEmail());
         } catch (BookingException e) {
-            Assertions.assertEquals("Email cannot be null or empty.", e.getMessage());
+            Assertions.assertEquals(BookingPlaceValidatorError.INVALID_EMAIL, e.getMessage());
         }
+    }
+    
+    @Test
+    void testValidDates() throws BookingException {
+        BookingPlace validBookingPlace = createValidBookingPlace();
+        Assertions.assertTrue(BookingPlaceValidator.validateDates(validBookingPlace.getStartingPeriod(),validBookingPlace.getEndingPeriod()));
     }
 
     @Test
     void testInvalidDates() {
-        BookingPlace invalidBookingPlace = createValidBookingPlace();
-        invalidBookingPlace.setStartDate(LocalDate.now().plusDays(1));
-        invalidBookingPlace.setEndDate(LocalDate.now());
+        BookingPlace invalidBookingPlace = createInvalidBookingPlace();
         try {
-            BookingPlaceValidator.validate(invalidBookingPlace);
-            Assertions.fail("Expected BookingException was not thrown.");
+            BookingPlaceValidator.validateDates(invalidBookingPlace.getStartingPeriod(),invalidBookingPlace.getEndingPeriod());
+          
         } catch (BookingException e) {
-            Assertions.assertEquals("Invalid date range.", e.getMessage());
+            Assertions.assertEquals(BookingPlaceValidatorError.INVALID_DATES, e.getMessage());
         }
     }
 
     @Test
-    void testInvalidTimes() {
-        BookingPlace invalidBookingPlace = createValidBookingPlace();
-        invalidBookingPlace.setStartTime(LocalTime.of(14, 0));
-        invalidBookingPlace.setEndTime(LocalTime.of(12, 0));
-        try {
-            BookingPlaceValidator.validate(invalidBookingPlace);
-            Assertions.fail("Expected BookingException was not thrown.");
-        } catch (BookingException e) {
-            Assertions.assertEquals("Invalid time range.", e.getMessage());
-        }
+    void testValidAmount() throws BookingException {
+        BookingPlace validBookingPlace = createValidBookingPlace();
+        Assertions.assertTrue(BookingPlaceValidator.validateAmount(validBookingPlace.getAmount()));
     }
-
+    
     @Test
     void testInvalidAmount() {
-        BookingPlace invalidBookingPlace = createValidBookingPlace();
-        invalidBookingPlace.setAmount(-50.0);
+        BookingPlace invalidBookingPlace = createInvalidBookingPlace();
         try {
-            BookingPlaceValidator.validate(invalidBookingPlace);
-            Assertions.fail("Expected BookingException was not thrown.");
+            BookingPlaceValidator.validateAmount(invalidBookingPlace.getAmount());
+            
         } catch (BookingException e) {
-            Assertions.assertEquals("Amount cannot be negative.", e.getMessage());
+            Assertions.assertEquals(BookingPlaceValidatorError.INVALID_AMOUNT, e.getMessage());
         }
+    }
+    
+    @Test
+    void testValidStatus() throws BookingException {
+        BookingPlace validBookingPlace = createValidBookingPlace();
+        Assertions.assertTrue(BookingPlaceValidator.validateStatus(validBookingPlace.getStatus()));
     }
 
     @Test
     void testInvalidStatus() {
-        BookingPlace invalidBookingPlace = createValidBookingPlace();
-        invalidBookingPlace.setStatus(null);
+        BookingPlace invalidBookingPlace = createInvalidBookingPlace();
         try {
-            BookingPlaceValidator.validate(invalidBookingPlace);
-            Assertions.fail("Expected BookingException was not thrown.");
+            BookingPlaceValidator.validateStatus(invalidBookingPlace.getStatus());
+         
         } catch (BookingException e) {
-            Assertions.assertEquals("Status cannot be null or empty.", e.getMessage());
+            Assertions.assertEquals(BookingPlaceValidatorError.INVALID_STATUS, e.getMessage());
         }
     }
-
-    @Test
-    void testInvalidBookingDuration() {
-        BookingPlace invalidBookingPlace = createValidBookingPlace();
-        invalidBookingPlace.setBookingDuration(null);
-        try {
-            BookingPlaceValidator.validate(invalidBookingPlace);
-            Assertions.fail("Expected BookingException was not thrown.");
-        } catch (BookingException e) {
-            Assertions.assertEquals("Booking duration cannot be null or empty.", e.getMessage());
-        }
-    }
-
 }
-

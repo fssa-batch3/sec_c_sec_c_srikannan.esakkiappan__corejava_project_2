@@ -19,13 +19,14 @@ public class TestUserValidator {
      * @return An invalid user instance.
      */
     public static User testInvalidUser() {
-        User invalidUser = new User(null, null, null, null, null, null, null);
-        return invalidUser;
-    }
+        User invalidUser = new User(null, null, null, null, null, null, null, 0, 0);
+        return invalidUser; 
+    } 
     
     public static User testInvalidTenant() {
         User invalidTenant = new User(null, null, null, null, null, null);
-        return invalidTenant;
+        return invalidTenant; 
+        
     }
     
     public static User testValidTenant() { 
@@ -36,6 +37,7 @@ public class TestUserValidator {
         details.setpPhoneNum("9799085013");
         details.setPassword("Sri@2003");
         details.setBikephotourl("https://iili.io/HvUnGHX.jpg");
+        
         return details;
     }
  
@@ -45,7 +47,7 @@ public class TestUserValidator {
      * @return A valid user instance.
      */
     public static User testValidUser() { 
-        User details = new User(null, null, null, null, null, null, null);
+        User details = new User(null, null, null, null, null, null, null,0,0);
         details.setFirstName("Srikannan");
         details.setEmail("Srikann.2003@gmail.com");
         details.setAddress("25,Raniyammalnagar");
@@ -53,6 +55,8 @@ public class TestUserValidator {
         details.setPassword("Sri@2003");
         details.setMapurl("https://maps.google.com?q=location");
         details.setPlacephotourl("https://iili.io/HyP0C8b.png");
+        details.setLatitude(40.7128);
+        details.setLongitude(-74.0060);
         return details;
     }
 
@@ -143,9 +147,9 @@ public class TestUserValidator {
     void validTestAddress() throws InvalidUserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validateAddress(datas.getAddress()));
-    }
+    } 
 
-    /**
+    /** 
      * Tests the validation of an invalid address (less than 5 characters).
      */
     @Test
@@ -278,6 +282,31 @@ public class TestUserValidator {
             Assertions.assertEquals(UserValidatorErrors.INVALID_PLACEPHOTOURL, e.getMessage());
         }
     }
+    
+    @Test
+    void validLatitude() {
+    	User datas = TestUserValidator.testValidUser();
+        Assertions.assertTrue(UserValidator.validateLatitude(datas.getLatitude()));
+    }
+    
+    @Test
+    void inValidLatitude() {
+    	User invaliddatas = TestUserValidator.testInvalidUser();
+        Assertions.assertTrue(UserValidator.validateLatitude(invaliddatas.getLatitude()));
+    }
+    
+    @Test
+    void validLongitude() {
+    	User datas = TestUserValidator.testValidUser();
+        Assertions.assertTrue(UserValidator.validateLongitude(datas.getLongitude()));
+    }
+    
+    @Test
+    void inValidLongitude() {
+    	User invaliddatas = TestUserValidator.testInvalidUser();
+        Assertions.assertTrue(UserValidator.validateLongitude(invaliddatas.getLongitude()));
+    }
+    
     
 //    ---------------------------------------------------------------------------
     

@@ -1,6 +1,6 @@
 package com.fssa.parkinplace.exception;
 
-public class BookingException extends RuntimeException {
+public class BookingException extends Exception {
 	
 	// Unique identifier for serialization
 	private static final long serialVersionUID = 1L;

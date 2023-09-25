@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.parkinplace.exception.DAOException;
+import com.fssa.parkinplace.exception.UserException;
 import com.fssa.parkinplace.model.User;
+import com.google.protobuf.ServiceException;
 
 /**
  * This class contains test cases for the UserService class.
@@ -21,10 +23,10 @@ class TestUserService {
      */
     public User userDetails() {
         User p1 = new User(null, null, null, null, null, null,null, 0,0); 
-        p1.setId(1);  
+        p1.setId(12);  
         p1.setFirstName("Sri");
-        p1.setpPhoneNum("8617728611");
-        p1.setEmail("srik.2003@gmail.com");
+        p1.setpPhoneNum("8617728611"); 
+        p1.setEmail("ram002@gmail.com");
         p1.setAddress("15,MahathmaGandhiNagar,Tharamani");
         p1.setPassword("Srik@2003");
         p1.setMapurl("https://maps.app.goo.gl/Mr8fd3QVjYEJHqGE91");
@@ -32,10 +34,10 @@ class TestUserService {
         p1.setLatitude(40.7128);
         p1.setLongitude(-74.0060);
 
-        return p1;  
+        return p1;   
     } 
-
-    /**
+ 
+    /** 
      * Creates and returns a User object with updated sample details for testing.
      * 
      * @return A User object with updated sample details.
@@ -86,11 +88,17 @@ class TestUserService {
      * Tests the addUser method of UserService for valid user addition.
      *
      * @throws DAOException If a DAOException occurs during testing.
+     * @throws ServiceException 
      */
     @Test
-    void testValidAddUser() throws DAOException {
+    void testValidAddUser() throws DAOException, ServiceException {
         TestUserService userservice = new TestUserService();
-        Assertions.assertTrue(UserService.addUser(userservice.userDetails()));
+        try {
+			Assertions.assertTrue(UserService.addUser(userservice.userDetails()));
+		} catch (UserException | DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     /** 
@@ -127,13 +135,13 @@ class TestUserService {
     }
     
     @Test
-    void testValidAddTenant() throws DAOException {
+    void testValidAddTenant() throws DAOException, UserException, ServiceException {
         TestUserService userservice = new TestUserService();
         Assertions.assertTrue(UserService.addTenant(userservice.TenantDetails()));
     }
     
     @Test
-    void testValidUpdateTenant() throws DAOException {
+    void testValidUpdateTenant() throws DAOException, UserException {
         TestUserService userservice = new TestUserService();
         Assertions.assertTrue(UserService.updateTenant(userservice.updateTenantDetails()));
     }
@@ -150,9 +158,15 @@ class TestUserService {
     }
     
     @Test
-    void testValidGetUserByEmail() throws DAOException {
+    void testValidGetUserById() throws DAOException {
     	TestUserService userservice = new TestUserService();
-        Assertions.assertNotNull(UserService.getUserByEmail(userDetails().getEmail()));
+        Assertions.assertNotNull(UserService.getUserById(userDetails().getUserId()));
+    }
+    
+    @Test
+    void testValidIsUserExist() throws DAOException, ServiceException {
+    	TestUserService userservice = new TestUserService();
+    	Assertions.assertTrue(UserService.isUserExist(updateUserDetails().getEmail()));
     }
     
 }

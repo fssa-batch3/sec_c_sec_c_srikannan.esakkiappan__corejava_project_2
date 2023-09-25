@@ -19,24 +19,25 @@ public class UserValidator {
      * @return True if the validation passes.
      * @throws UserException if there is an issue with the validation.
      */
-    public static boolean validate(User user) {
+    public static boolean validate(User user) throws UserException {
         if (user == null) {
             throw new UserException(UserValidatorErrors.INVALID_OBJECT_NULL);
         }
+         
         validateName(user.getFirstName());
         validateEmail(user.getEmail());
-        validateAddress(user.getAddress());
+        validateAddress(user.getAddress()); 
         validatePhoneNumber(user.getPhoneNum());
         validatePassword(user.getPassword());
         validateMapUrl(user.getMapurl());
-        validatePlacePhotoUrl(user.getPlacephotourl());
+        validatePlacePhotoUrl(user.getPlacephotourl()); 
         validateLatitude(user.getLatitude());
         validateLongitude(user.getLongitude());
         
         return true; 
     }
 
-    public static boolean validateTenant(User user) {
+    public static boolean validateTenant(User user) throws UserException {
         if (user == null) {
             throw new UserException(UserValidatorErrors.INVALID_OBJECT_NULL);
         }
@@ -62,7 +63,7 @@ public class UserValidator {
             throw new UserException(UserValidatorErrors.INVALID_NAME);
         } 
 
-        String nameregex = "^[A-Za-z]{2,30}$";
+        String nameregex = "^[A-Za-z]{3,20}$";
         Pattern pattern = Pattern.compile(nameregex);
         Matcher matcher = pattern.matcher(name);
         Boolean isMatch = matcher.matches();
@@ -89,7 +90,7 @@ public class UserValidator {
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-        Boolean isMatch = matcher.matches();
+        Boolean isMatch = matcher.matches(); 
         if (Boolean.TRUE.equals(isMatch)) {
             return true;
         } else {
@@ -106,13 +107,13 @@ public class UserValidator {
      */
     public static boolean validateAddress(String address) throws UserException {
         // Check if the Address is null or empty
-        if (address == null || "".equals(address.trim())) {
+        if (address == null || address.trim().isEmpty()) {
             throw new UserException(UserValidatorErrors.INVALID_ADDRESS);
         }
 
         // Regular expression to validate the Address format (at least one non-space
         // character)
-        String nameregex = "^(?=.*\\S).+$";
+        String nameregex = "^[a-zA-Z0-9\\s\\-\\,\\#\\.\\'\\/]{10,255}$";
         Pattern pattern = Pattern.compile(nameregex);
         Matcher matcher = pattern.matcher(address);
         Boolean isMatch = matcher.matches();
@@ -133,7 +134,7 @@ public class UserValidator {
      */
     public static boolean validatePhoneNumber(String phonenum) throws UserException {
 
-        if (phonenum == null || "".equals(phonenum.trim()) || phonenum.length() < 2) {
+        if (phonenum == null || "".equals(phonenum.trim()) || phonenum.length() < 10 || phonenum.length() > 10) {
             throw new UserException(UserValidatorErrors.INVALID_PHONENUMBER);
         }
 
@@ -179,7 +180,7 @@ public class UserValidator {
      */
     public static boolean validateMapUrl(String mapurl) throws UserException {
         // Check if the MapUrl is null, empty, or too short (less than 2 characters)
-        if (mapurl == null || "".equals(mapurl.trim()) || mapurl.length() < 2) {
+        if (mapurl == null || "".equals(mapurl.trim()) || mapurl.length() < 7) {
             throw new UserException(UserValidatorErrors.INVALID_MAPURL);
         }
 
@@ -206,7 +207,7 @@ public class UserValidator {
     public static boolean validatePlacePhotoUrl(String placephotourl) throws UserException {
         // Check if the PlacePhotoUrl is null, empty, or too short (less than 2
         // characters)
-        if (placephotourl == null || "".equals(placephotourl.trim()) || placephotourl.length() < 2) {
+        if (placephotourl == null || "".equals(placephotourl.trim()) || placephotourl.length() < 7) {
             throw new UserException(UserValidatorErrors.INVALID_PLACEPHOTOURL);
         }
 
@@ -224,14 +225,14 @@ public class UserValidator {
         return true;
     }
     
-    public static boolean validateLatitude(double latitude) {
+    public static boolean validateLatitude(double latitude) throws UserException {
     	if(latitude < -90 && latitude > 90) {
     		throw new UserException(UserValidatorErrors.INVALID_LATITUDE);
     	}
         return true;
     }
     
-    public static boolean validateLongitude(double longitude) {
+    public static boolean validateLongitude(double longitude) throws UserException {
     	if(longitude < -180 && longitude > 180) {
     		throw new UserException(UserValidatorErrors.INVALID_LONGITUDE);
     	}
@@ -241,7 +242,7 @@ public class UserValidator {
     public static boolean validateBikePhotoUrl(String bikephotourl) throws UserException {
         // Check if the PlacePhotoUrl is null, empty, or too short (less than 2
         // characters)
-        if (bikephotourl == null || "".equals(bikephotourl.trim()) || bikephotourl.length() < 2) {
+        if (bikephotourl == null || "".equals(bikephotourl.trim()) || bikephotourl.length() < 7) {
             throw new UserException(UserValidatorErrors.INVALID_PLACEPHOTOURL);
         }
 

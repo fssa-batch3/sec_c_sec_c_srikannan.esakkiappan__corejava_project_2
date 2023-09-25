@@ -5,22 +5,29 @@ import java.time.LocalDateTime;
 public class BookingPlace {
 	
     private int bookingId;
-    private String leaserEmail;
-    private String tenantEmail;
+    private int leaserId;
+	private String tenantEmail;
+    private String tenantName;
+    private String tenantBikeImg;
+    private String tenantPhone;
     private LocalDateTime startingPeriod;
     private LocalDateTime endingPeriod;
     private double amount;
     private String status;
     
     
-    public BookingPlace(int bookingId, String leaserEmail, String tenantEmail, LocalDateTime startingPeriod,
-			LocalDateTime endingPeriod, double amount, String status) {
+    public BookingPlace(int bookingId, int leaserId, String tenantEmail, String tenantName, String tenantBikeImg,
+			String tenantPhone, LocalDateTime startingPeriod, LocalDateTime endingPeriod, double amount,
+			String status) {
 		super();
 		this.bookingId = bookingId;
-		this.leaserEmail = leaserEmail;
-		this.tenantEmail = tenantEmail;
+		this.leaserId = leaserId; 
+		this.tenantEmail = tenantEmail; 
+		this.tenantName = tenantName;
+		this.tenantBikeImg = tenantBikeImg;
+		this.tenantPhone = tenantPhone;
 		this.startingPeriod = startingPeriod;
-		this.endingPeriod = endingPeriod; 
+		this.endingPeriod = endingPeriod;
 		this.amount = amount;
 		this.status = status;
 	}
@@ -34,15 +41,21 @@ public class BookingPlace {
 	}
 
 
-	public BookingPlace(String leaserEmail, String tenantEmail, LocalDateTime startingPeriod,
-			LocalDateTime endingPeriod, double amount, String status) {
-		this.leaserEmail= leaserEmail;
+    public BookingPlace(String tenantName, String tenantPhone, int leaserId, String tenantBikeImg, String tenantEmail,
+			 LocalDateTime startingPeriod, LocalDateTime endingPeriod, double amount,
+			String status) {
+		super();
+		this.tenantName = tenantName;
+		this.tenantPhone = tenantPhone;
+		this.tenantBikeImg = tenantBikeImg;
+		this.leaserId = leaserId;
 		this.tenantEmail = tenantEmail;
 		this.startingPeriod = startingPeriod;
 		this.endingPeriod = endingPeriod;
 		this.amount = amount;
 		this.status = status;
 	}
+
 
 
 
@@ -54,12 +67,12 @@ public class BookingPlace {
         this.bookingId = bookingId;
     }
 
-    public String getLeaserEmail() {
-        return leaserEmail;
+    public int getLeaserId() {
+        return leaserId;
     }
 
-    public void setLeaserEmail(String leaserEmail) {
-        this.leaserEmail = leaserEmail;
+    public void setLeaserId(int leaserId) {
+        this.leaserId = leaserId;
     }
 
     public String getTenantEmail() {
@@ -101,5 +114,29 @@ public class BookingPlace {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    public String getTenantName() {
+		return tenantName;
+	}
+
+	public void setTenantName(String tenantName) {
+		this.tenantName = tenantName;
+	}
+
+	public String getTenantBikeImg() {
+		return tenantBikeImg;
+	}
+
+	public void setTenantBikeImg(String tenantBikeImg) {
+		this.tenantBikeImg = tenantBikeImg;
+	}
+
+	public String getTenantPhone() {
+		return tenantPhone;
+	}
+
+	public void setTenantPhone(String tenantPhone) {
+		this.tenantPhone = tenantPhone;
+	}
 
 }

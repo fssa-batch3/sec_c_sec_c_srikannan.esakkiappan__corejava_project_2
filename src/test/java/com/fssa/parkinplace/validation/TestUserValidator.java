@@ -26,9 +26,9 @@ public class TestUserValidator {
     public static User testInvalidTenant() {
         User invalidTenant = new User(null, null, null, null, null, null);
         return invalidTenant; 
-        
+         
     }
-    
+     
     public static User testValidTenant() { 
         User details = new User(null, null, null, null, null, null);
         details.setFirstName("Ram");
@@ -88,9 +88,10 @@ public class TestUserValidator {
      * Tests the validation of a valid first name.
      *
      * @throws InvalidUserException if the first name is invalid.
+     * @throws UserException 
      */
     @Test
-    void validTestFirstName() throws InvalidUserException {
+    void validTestFirstName() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validateName(datas.getFirstName()));
     }
@@ -118,9 +119,10 @@ public class TestUserValidator {
      * Tests the validation of a valid email address.
      *
      * @throws InvalidUserException if the email address is invalid.
+     * @throws UserException 
      */
     @Test
-    void validTestEmail() throws InvalidUserException {
+    void validTestEmail() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validateEmail(datas.getEmail()));
     }
@@ -140,11 +142,12 @@ public class TestUserValidator {
 
     /**
      * Tests the validation of a valid address.
+     * @throws UserException 
      *
      * @throws InvalidParkingPlaceException if there is an issue with the address.
      */
     @Test
-    void validTestAddress() throws InvalidUserException {
+    void validTestAddress() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validateAddress(datas.getAddress()));
     } 
@@ -172,9 +175,10 @@ public class TestUserValidator {
      * Tests the validation of a valid phone number.
      *
      * @throws InvalidUserException if the phone number is invalid.
+     * @throws UserException 
      */
     @Test
-    void validTestPhoneNumber() throws InvalidUserException {
+    void validTestPhoneNumber() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validatePhoneNumber(datas.getPhoneNum()));
     }
@@ -197,9 +201,10 @@ public class TestUserValidator {
      * Tests the validation of a valid password.
      *
      * @throws InvalidUserException if the password is invalid.
+     * @throws UserException 
      */
     @Test
-    void validTestPassword() throws InvalidUserException {
+    void validTestPassword() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validatePassword(datas.getPassword()));
     }
@@ -225,11 +230,12 @@ public class TestUserValidator {
 
     /**
      * Tests the validation of a valid map URL.
+     * @throws UserException 
      *
      * @throws InvalidParkingPlaceException if there is an issue with the map URL.
      */
     @Test
-    void validTestMapUrl() throws InvalidUserException {
+    void validTestMapUrl() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validateMapUrl(datas.getMapurl()));
     }
@@ -255,11 +261,12 @@ public class TestUserValidator {
 
     /**
      * Tests the validation of a valid place photo URL.
+     * @throws UserException 
      *
      * @throws InvalidParkingPlaceException if there is an issue with the place photo URL.
      */
     @Test
-    void validTestPhotoUrl() throws InvalidUserException {
+    void validTestPhotoUrl() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validatePlacePhotoUrl(datas.getPlacephotourl()));
     }
@@ -284,25 +291,25 @@ public class TestUserValidator {
     }
     
     @Test
-    void validLatitude() {
+    void validLatitude() throws UserException {
     	User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validateLatitude(datas.getLatitude()));
     }
     
     @Test
-    void inValidLatitude() {
+    void inValidLatitude() throws UserException {
     	User invaliddatas = TestUserValidator.testInvalidUser();
         Assertions.assertTrue(UserValidator.validateLatitude(invaliddatas.getLatitude()));
     }
     
     @Test
-    void validLongitude() {
+    void validLongitude() throws UserException {
     	User datas = TestUserValidator.testValidUser();
         Assertions.assertTrue(UserValidator.validateLongitude(datas.getLongitude()));
     }
     
     @Test
-    void inValidLongitude() {
+    void inValidLongitude() throws UserException {
     	User invaliddatas = TestUserValidator.testInvalidUser();
         Assertions.assertTrue(UserValidator.validateLongitude(invaliddatas.getLongitude()));
     }
@@ -313,12 +320,12 @@ public class TestUserValidator {
     
     
     @Test
-    void validTestBikePhotoUrl() throws InvalidUserException {
+    void validTestBikePhotoUrl() throws InvalidUserException, UserException {
         User datas = TestUserValidator.testValidTenant();
         Assertions.assertTrue(UserValidator.validateBikePhotoUrl(datas.getBikephotourl()));
     }
     
-    @Test
+    @Test 
     void inValidTestBikePhotoUrl() {
         User invaliddatas = TestUserValidator.testInvalidTenant();
         try { 

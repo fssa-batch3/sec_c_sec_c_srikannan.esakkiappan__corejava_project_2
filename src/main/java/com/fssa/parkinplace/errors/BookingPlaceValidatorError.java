@@ -8,6 +8,8 @@ public class BookingPlaceValidatorError {
 	
 	public static final String INVALID_OBJECT_NULL = "Argument cannot be null";
 	
+	public static final String INVALID_LEASERID = "Leaser id cannot be null";
+	
 	public static final String INVALID_EMAIL = "Email is: Invalid";
 	
 	public static final String INVALID_DATES = "Date is: Invalid";

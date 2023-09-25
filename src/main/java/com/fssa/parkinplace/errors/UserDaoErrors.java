@@ -14,5 +14,7 @@ public class UserDaoErrors {
 	public static final String INVALID_DELETE = "Delete user from the Database is Failed";
 	
 	public static final String INVALID_READ = "Reading user from the Database is Failed";
+	
+	public static final String EMAIL_EXIST = "Email is already exist";
 
 }

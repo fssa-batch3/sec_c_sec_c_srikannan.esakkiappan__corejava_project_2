@@ -20,7 +20,6 @@
 	</properties>
 
 	<dependencies>
-		
 
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
 		<dependency>
@@ -44,7 +43,11 @@
    			<version>2.0.1.Final</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fssa.corejava</groupId>

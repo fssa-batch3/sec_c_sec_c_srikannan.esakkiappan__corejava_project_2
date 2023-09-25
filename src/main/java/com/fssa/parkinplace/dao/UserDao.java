@@ -13,6 +13,7 @@ import com.fssa.parkinplace.errors.UserDaoErrors;
 import com.fssa.parkinplace.exception.DAOException;
 import com.fssa.parkinplace.model.User;
 import com.fssa.util.ConnectionUtil;
+import com.fssa.util.EncryptPassword.Password;
 
 /**
  * This class provides data access methods for interacting with the userdetails
@@ -20,10 +21,10 @@ import com.fssa.util.ConnectionUtil;
  */
 public class UserDao {
 
-	/**
-	 * Adds a new user to the database.
+	/**     
+	 * Adds a new user to the database. 
 	 *
-	 * @param user The User object representing the user to be added.
+	 * @param user The User object representing the user to be added. 
 	 * @return True if the insertion was successful, false otherwise.
 	 * @throws DAOException if there is an issue with the database operation.
 	 */
@@ -31,20 +32,21 @@ public class UserDao {
 		final String query = "INSERT INTO userdetails (name, email, address, phonenumber, password, mapurl, placephotourl,lattitude,longitude) VALUES(?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
-
+ 
 			try (PreparedStatement data = connection.prepareStatement(query)) {
 				data.setString(1, user.getFirstName());
 				data.setString(2, user.getEmail());
 				data.setString(3, user.getAddress());
-				data.setString(4, user.getPhoneNum());
-				data.setString(5, user.getPassword()); 
+				data.setString(4, user.getPhoneNum()); 
+				String hashPassword = Password.encryptPassword(user.getPassword());
+				data.setString(5, hashPassword);
 				data.setString(6, user.getMapurl());
 				data.setString(7, user.getPlacephotourl());
 				data.setDouble(8, user.getLatitude());
 				data.setDouble(9, user.getLongitude());
 
 				int row = data.executeUpdate();
- 
+  
 				// Print a success message and return true if the insertion was successful
 				return (row > 0);
 			}
@@ -65,7 +67,8 @@ public class UserDao {
 				data.setString(2, user.getEmail());
 				data.setString(3, user.getAddress());
 				data.setString(4, user.getPhoneNum());
-				data.setString(5, user.getPassword()); 
+				String hashPassword = Password.encryptPassword(user.getPassword());
+				data.setString(5, hashPassword); 
 				data.setString(6, user.getBikephotourl());
 
 				int row = data.executeUpdate();
@@ -344,19 +347,19 @@ public class UserDao {
 	}
 	
 	
-	public static User login(String email, String password) throws DAOException {
+	public static User login(String email) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			// SQL query to delete the user from the 'user' table.
-			String query = "SELECT * FROM userdetails WHERE email = ? AND password = ?";
+			String query = "SELECT * FROM userdetails WHERE email = ?";
 
 			// Prepares the SQL query with the user_id.
 			try (PreparedStatement psmt = con.prepareStatement(query)) {
 
 				// Sets the user_id in the PreparedStatement.
 				psmt.setString(1, email);
-				psmt.setString(2, password);
+				
 
 				// Executes the delete query.
 				try (ResultSet rs = psmt.executeQuery()) {
@@ -364,6 +367,7 @@ public class UserDao {
 					if (rs.next()) {
 						User userData = new User();
 
+						userData.setId(rs.getInt("id"));
 						userData.setFirstName(rs.getString("name"));
 						userData.setEmail(rs.getString("email"));
 						userData.setAddress(rs.getString("address"));
@@ -385,19 +389,19 @@ public class UserDao {
 		}
 	}
 	
-	public static User tenantlogin(String email, String password) throws DAOException {
+	public static User tenantlogin(String email) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			// SQL query to delete the user from the 'user' table.
-			String query = "SELECT * FROM Tenantdetails WHERE email = ? AND password = ?";
+			String query = "SELECT * FROM Tenantdetails WHERE email = ?";
 
 			// Prepares the SQL query with the user_id.
 			try (PreparedStatement psmt = con.prepareStatement(query)) {
 
 				// Sets the user_id in the PreparedStatement.
 				psmt.setString(1, email);
-				psmt.setString(2, password);
+				
 
 				// Executes the delete query.
 				try (ResultSet rs = psmt.executeQuery()) {
@@ -405,6 +409,7 @@ public class UserDao {
 					if (rs.next()) {
 						User userData = new User();
 
+						userData.setId(rs.getInt("id"));
 						userData.setFirstName(rs.getString("name"));
 						userData.setEmail(rs.getString("email"));
 						userData.setAddress(rs.getString("address"));
@@ -481,33 +486,61 @@ public class UserDao {
 		return userNames;
 	}
 	
-	public boolean isUserExist(User user) throws DAOException {
-		// Retrieves all user email addresses from the 'user' table.
-		List<String> userEmails = getAllUserEmails();
-
-		// Checks if the provided user's email is in the list of user emails.
-		return userEmails.contains(user.getEmail());
+//	public boolean isUserExist(User user) throws DAOException {
+//		// Retrieves all user email addresses from the 'user' table.
+//		List<String> userEmails = getAllUserEmails();
+//		
+//		// Checks if the provided user's email is in the list of user emails.
+//		return userEmails.contains(user.getEmail());
+//	}
+	
+	public static boolean isUserExist(String email) throws DAOException {
+		final String query = "SELECT email FROM userdetails WHERE email = ?";
+		try (Connection con = ConnectionUtil.getConnection()) {
+			try (PreparedStatement pst = con.prepareStatement(query)) {
+				pst.setString(1, email);
+				try (ResultSet rs = pst.executeQuery()) {
+					if (rs.next()) {
+						return true;
+					} 
+				}
+			}
+		} catch (SQLException e) {
+			throw new DAOException(UserDaoErrors.EMAIL_EXIST);
+		}
+		return false;
 	}
 	
-	public boolean isTenantExist(User user) throws DAOException {
-		List<String> tenantEmails = getAllTenantEmails();
-		
-		return tenantEmails.contains(user.getEmail());
+	public static boolean isTenantExist(String email) throws DAOException {
+		final String query = "SELECT email FROM Tenantdetails WHERE email = ?";
+		try (Connection con = ConnectionUtil.getConnection()) {
+			try (PreparedStatement pst = con.prepareStatement(query)) {
+				pst.setString(1, email);
+				try (ResultSet rs = pst.executeQuery()) {
+					if (rs.next()) {
+						return true;
+					} 
+				}
+			}
+		} catch (SQLException e) {
+			throw new DAOException(UserDaoErrors.EMAIL_EXIST);
+		}
+		return false;
 	}
 	
-	public static User getUserByEmail(String email) throws DAOException {
+	public static User getUserById(int leaserId) throws DAOException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			// SQL query to delete the user from the 'user' table.
-			String query = "SELECT * FROM userdetails WHERE email = ?";
+			String query = "SELECT * FROM userdetails WHERE id = ?";
 
 			User userData;
 			// Prepares the SQL query with the user_id.
 			try (PreparedStatement psmt = con.prepareStatement(query)) {
 
 				
-				psmt.setString(1, email);
+				psmt.setInt(1, leaserId);
 				
 
 				// Executes the delete query.
@@ -524,6 +557,7 @@ public class UserDao {
 						userData.setPlacephotourl(rs.getString("placephotourl"));
 						userData.setLatitude(rs.getDouble("lattitude"));
 						userData.setLongitude(rs.getDouble("longitude"));
+						userData.setId(rs.getInt("id"));
 
 						return userData; 
 			 		}

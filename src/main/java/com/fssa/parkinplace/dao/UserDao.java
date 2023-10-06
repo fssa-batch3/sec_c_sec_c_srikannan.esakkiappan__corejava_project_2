@@ -600,7 +600,7 @@ public class UserDao {
 						userData.setPlacephotourl(rs.getString("bikephotourl"));
 
 						return userData; 
-					}
+					} 
 				}
 
 			}

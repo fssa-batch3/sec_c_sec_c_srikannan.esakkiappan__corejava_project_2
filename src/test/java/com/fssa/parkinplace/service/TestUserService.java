@@ -122,7 +122,7 @@ class TestUserService {
         Assertions.assertTrue(UserService.deleteUser(userDetails().getUserId()));
     }
   
-    /**
+    /** 
      * Tests the readUser method of UserService for valid user retrieval.
      *
      * @throws DAOException If a DAOException occurs during testing.

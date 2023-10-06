@@ -23,7 +23,7 @@ class TestBookingPlaceService {
 		p.setTenantPhone("9884616021");
 		p.setTenantBikeImg("https://iili.io/HUN8VHX.jpg");
 		p.setLeaserId(1);
-		p.setTenantEmail("srik@gmail.com");
+		p.setTenantEmail("srik@gmail.com"); 
 		p.setStartingPeriod(LocalDateTime.now());
 		p.setEndingPeriod(LocalDateTime.now().plusDays(7));
 		p.setAmount(100.0);

@@ -28,7 +28,7 @@ public class TestUserValidator {
         return invalidTenant; 
          
     }
-     
+      
     public static User testValidTenant() { 
         User details = new User(null, null, null, null, null, null);
         details.setFirstName("Ram");

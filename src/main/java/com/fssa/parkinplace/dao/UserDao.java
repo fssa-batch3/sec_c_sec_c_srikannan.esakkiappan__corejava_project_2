@@ -94,7 +94,7 @@ public class UserDao {
 
 		int id = getUserIdByEmail(user.getEmail());
 
-		final String query = "UPDATE userdetails SET name=?, email=?, address=?, phonenumber=?, password=?, mapurl=?, placephotourl=?,lattitude=?,longitude=? WHERE id=?";
+		final String query = "UPDATE userdetails SET name=?, email=?, address=?, phonenumber=?, password=?, mapurl=?, placephotourl=? WHERE id=?";
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -108,9 +108,7 @@ public class UserDao {
 				data.setString(5, user.getPassword());
 				data.setString(6, user.getMapurl());
 				data.setString(7, user.getPlacephotourl());
-				data.setDouble(8, user.getLatitude());
-				data.setDouble(9, user.getLongitude());
-				data.setInt(10, id);
+				data.setInt(8, id);
 
 				// Execute the query to update the data in the database
 				int row = data.executeUpdate();
@@ -293,7 +291,7 @@ public class UserDao {
 						userData.setMapurl(rs.getString("mapurl"));
 						userData.setPlacephotourl(rs.getString("placephotourl"));
 						userData.setLatitude(rs.getDouble("lattitude"));
-						userData.setLongitude(rs.getDouble("longitude"));
+						userData.setLongitude(rs.getDouble("longitude"));  
 
 						user.add(userData);
 

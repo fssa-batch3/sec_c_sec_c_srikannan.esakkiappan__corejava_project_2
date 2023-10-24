@@ -232,8 +232,6 @@ public class User {
         this.longitude = longitude;
     }
     
-    
-    
     public String getBikephotourl() {
     	return bikephotourl;
     }

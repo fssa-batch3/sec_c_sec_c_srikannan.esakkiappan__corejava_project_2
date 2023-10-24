@@ -7,7 +7,7 @@ public class BookingException extends Exception {
 	
 	// Constructor that takes a custom error message as input
 	public BookingException(String message) {
-		// Call the constructor of the base class (RuntimeException) with the custom error message
+		// Call the constructor of the base class (Exception) with the custom error message
 		super(message);
 	}
 }

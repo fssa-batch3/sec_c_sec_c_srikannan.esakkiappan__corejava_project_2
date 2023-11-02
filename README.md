@@ -47,3 +47,9 @@
 | amount         | DOUBLE       | NOT NULL            |
 | status         | VARCHAR(255) | NOT NULL            |
 | tenantBikeImg  | VARCHAR(150) | NOT NULL            |
+
+
+
+
+<img width="508" alt="Screenshot 2023-11-02 194434" src="https://github.com/fssa-batch3/sec_c_sec_c_srikannan.esakkiappan__corejava_project_2/assets/116251899/9c3bfe3c-e326-4428-b055-4ae173ace31c">
+
